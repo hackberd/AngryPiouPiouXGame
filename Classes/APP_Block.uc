@@ -68,9 +68,9 @@ DefaultProperties
 		    Materials(0)=Material'AngryPiouPiouXAllAssets.Materials.M_BlockWall_02_D'
 		    PhysMaterialOverride=PhysicalMaterial'AngryPiouPiouXAllAssets.physicsmaterial.PM_Stone'
 		
-            //RBChannel=RBCC_GameplayPhysics
-		    //LightingChannels=(bInitialized=True,Static=True)
-
+            RBChannel=RBCC_GameplayPhysics
+		    LightingChannels=(bInitialized=True,Static=True)
+			hiddengame=false
 		    bNotifyRigidBodyCollision=true // necessary to trigger Event RigiBodyCollision
 		    ScriptRigidBodyCollisionThreshold=10.0// necessary to trigger Event RigiBodyCollision
       End Object

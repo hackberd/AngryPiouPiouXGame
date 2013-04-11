@@ -19,6 +19,8 @@ class APP_GameStateController extends Actor;
 var MobileMenuScene CurrentMenu;
 var array<APP_Target> Targets;
 var APP_GameStateData GameState;
+var bool bForceWin;
+var bool bForceLoose;
 
 var String NextLevelMap ;   //TODO Multiple level management (with Menu to select them, save player progression )
 var bool bShouldDiplayStartMenu;
@@ -27,6 +29,7 @@ var bool bShouldDiplayStartMenu;
 function init(APP_GameStateData GS, bool bStartMenu){
     GameState = GS;
 	bShouldDiplayStartMenu=bStartMenu;
+	bForceWin = false;
 	gotostate('GameInit');
 }
 
@@ -34,7 +37,7 @@ function init(APP_GameStateData GS, bool bStartMenu){
 
 State GameInit
 {	
-Begin:
+	Begin:
    
     GameState.reset();
     GameState.nbTargetLeft = InitTargets();
@@ -95,13 +98,25 @@ State GameWaitingTransition {
 
 function bool IsGameOver(out APP_GameStateData GS)
 {
-  //Winning Conditions
-  if(AllTargetDead(GS,"WON")) return true;
+	if (bForceWin) {
+	GameState.bIsGameOver = true;
+	GameState.GameOverReason = "WON";
+	gotostate('GameResults');
+	}
+	if (bForceLoose) {
+	GameState.bIsGameOver = true;
+	GameState.GameOverReason = "LOST";
+	gotostate('GameResults');
+	}
 
-  //Losing Conditions
-   if(!HasProjectileLeft(GS,"LOST")) return true;
-
+     if(AllTargetDead(GS,"WON")) return true;
+		 //Winning Conditions
+	 //Losing Conditions
+	 if(!HasProjectileLeft(GS,"LOST")) return true;
+  
   return false;
+	
+	
 }
 
 /* Game Condition Rules*/
@@ -184,5 +199,5 @@ function  int InitTargets()
 
 DefaultProperties
 {
- NextLevelMap = "APP-SimpleCourtyard-2.udk" 
+ NextLevelMap = "APP-Blank-Map.udk" 
 }

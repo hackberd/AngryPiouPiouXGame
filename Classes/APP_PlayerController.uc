@@ -51,6 +51,18 @@ function PostThrowingPhase(){
 
 /** exec functions for debugging */
 
+exec function win() {
+	APP_Game(worldinfo.Game).getGameStateController().bForceWin = true;
+
+	
+}
+
+exec function loose() {
+	APP_Game(worldinfo.Game).getGameStateController().bForceLoose = true;
+
+}
+
+
 exec function ThrowProj(){
     APP_Game(WorldInfo.game).getThrowingStation().ThrowProjectileFrom(Swipe2DVector3D,pawn.location);
 }

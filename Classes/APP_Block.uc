@@ -66,14 +66,11 @@ DefaultProperties
 	Begin Object Name=StaticMeshComponent0
             StaticMesh=StaticMesh'AngryPiouPiouXAllAssets.StaticMeshes.Cube'
 		    Materials(0)=Material'AngryPiouPiouXAllAssets.Materials.M_BlockWall_02_D'
-		    PhysMaterialOverride=PhysicalMaterial'AngryPiouPiouXAllAssets.physicsmaterial.PM_Stone'  //contains physical parameters + impact effects
-		    ReplacementPrimitive=None
-			// Phsysics Channel 
-            RBChannel=RBCC_GameplayPhysics
-            bAllowApproximateOcclusion=True
-            bForceDirectLightMap=True
-            bUsePrecomputedShadows=True
-            LightingChannels=(bInitialized=True,Static=True)
+		    PhysMaterialOverride=PhysicalMaterial'AngryPiouPiouXAllAssets.physicsmaterial.PM_Stone'
+		
+            //RBChannel=RBCC_GameplayPhysics
+		    //LightingChannels=(bInitialized=True,Static=True)
+
 		    bNotifyRigidBodyCollision=true // necessary to trigger Event RigiBodyCollision
 		    ScriptRigidBodyCollisionThreshold=10.0// necessary to trigger Event RigiBodyCollision
       End Object

@@ -59,14 +59,7 @@ DefaultProperties
             StaticMesh=StaticMesh'AngryPiouPiouXAllAssets.StaticMeshes.Cube'
 		    Materials(0)=Material'AngryPiouPiouXAllAssets.Materials.M_NEC_Walls_BSP_Concrete'
 		    PhysMaterialOverride=PhysicalMaterial'AngryPiouPiouXAllAssets.PhysicalMaterials.PM_Stone'  //contains physical parameters + impact effects
-		    ReplacementPrimitive=None
-            RBChannel=RBCC_GameplayPhysics
-            bAllowApproximateOcclusion=True
-            bForceDirectLightMap=True
-            bUsePrecomputedShadows=True
-            LightingChannels=(bInitialized=True,Static=True)
-		    bNotifyRigidBodyCollision=true // necessary to trigger Event RigiBodyCollision
-		    ScriptRigidBodyCollisionThreshold=10.0// necessary to trigger Event RigiBodyCollision
+		    
       End Object
 
 		// Das ist der pfad, aber nicht aktiviert

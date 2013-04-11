@@ -189,8 +189,7 @@ DefaultProperties
 		//Materials(0)=MaterialInstanceConstant'AngryPiouPiouXAllAssets.Materials.APP_BlockWall_ThrowingStation'
 		Materials(0)=Material'AngryPiouPiouXAllAssets.Materials.M_BlockWall_02_D'
 		BlockRigidBody=false
-		bUsePrecomputedShadows=
-	FALSE
+		//bUsePrecomputedShadows= FALSE
 		
 	End Object
 	DrawScale=0.300000

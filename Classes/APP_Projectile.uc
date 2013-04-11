@@ -71,6 +71,7 @@ DefaultProperties
 	 Begin Object Name=StaticMeshComponent0
             StaticMesh      =StaticMesh'AngryPiouPiouXAllAssets.StaticMeshes.Sphere'
         	Materials(0)    =Material'AngryPiouPiouXAllAssets.Materials.M_BlockWall_02_D'
+			PhysMaterialOverride=PhysicalMaterial'AngryPiouPiouXAllAssets.PhysicalMaterials.PM_Projectile'
 		    bNotifyRigidBodyCollision=true // necessary to trigger Event RigiBodyCollision
 		    ScriptRigidBodyCollisionThreshold=10.0// necessary to trigger Event RigiBodyCollision
      End Object

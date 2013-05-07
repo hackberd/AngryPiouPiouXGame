@@ -33,7 +33,9 @@ function SpecialEffect()
 
 	newBird.ApplyImpulse(self.Velocity*1.5,VSize(self.Velocity),newBird.Location);
 	newBird.SetDrawScale(0.1);
-
+	APP_Game(worldinfo.Game).getCamera().setProjectile(
+		newBird
+		);
 	newBird = spawn(class 'APP_Projectile_BlueBird',self,'mytaghere', self.Location,self.Rotation,/*Archetype here*/ ,true);
 	// FRand() random float 0 to 1.0
 	// vect http://udn.epicgames.com/Three/UnrealScriptFunctions.html

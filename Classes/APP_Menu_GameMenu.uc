@@ -48,6 +48,11 @@ event OnTouch(MobileMenuObject Sender, ETouchType EventType, float TouchX, float
 	 APP_GAME(InputOwner.Outer.worldinfo.Game).getThrowingStation().setGameSpeed(1.0);	
 	RequestClosing();
 	 
+   } else if(Sender.Tag ~= "LoadLevel"){
+	
+     APP_GAME(InputOwner.Outer.worldinfo.Game).getThrowingStation().setGameSpeed(1.0);	
+	 APP_GAME(InputOwner.Outer.worldinfo.Game).getGameStateController().CurrentMenu = APP_GAME(InputOwner.Outer.worldinfo.Game).getPlayerController().MPI.OpenMenuScene(class'APP_Menu_LevelSelection');
+	 RequestClosing();
    } 
 }
 
@@ -136,7 +141,24 @@ defaultproperties
 	 *  Horizontal Button #3: 300 + (100+50)*2   = 600
 	 *  Horizontal Button #4: 300 + (100+50)*3   = 750
 	 * */
-
+	
+	Begin Object Class=MobileMenuButton Name=LoadButton
+      Tag="LoadLevel"
+	  Caption="Level Selection"
+	  CaptionColor=(R=255,G=0,B=0,A=127);
+      Left=300
+      Top=350
+      Width=100
+      Height=100
+      bRelativeLeft=false
+      bRelativeTop=false
+          TopLeeway=20
+      Images(0)=Texture2D'CastleUI.menus.T_CastleMenu2'
+      Images(1)=Texture2D'CastleUI.menus.T_CastleMenu2'
+      ImagesUVs(0)=(bCustomCoords=true,U=306,V=220,UL=310,VL=48)
+      ImagesUVs(1)=(bCustomCoords=true,U=306,V=271,UL=310,VL=48)
+   End Object
+   MenuObjects.Add(LoadButton)
 
     Begin Object Class=MobileMenuButton Name=QuitButton
       Tag="QuitButton"

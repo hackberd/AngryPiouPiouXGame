@@ -29,6 +29,8 @@ var  float   Angle,AngleBefore;
 var int Touches;
 var rotator  r;
 
+var bool doOnce;
+
 var  APP_Projectile          LastProjectileThrown; 
 
 /** init*/
@@ -90,7 +92,7 @@ function SetupZones(){
 
 	super.SetupZones();
 	FreeLookZone.OnTapDelegate          =  MobilePlayerInput(PlayerInput).ProcessWorldTouch; // to trigger Onmobileinput event on actor
-	FreeLookZone.OnProcessInputDelegate = OnProcessInputDelegate;
+	//FreeLookZone.OnProcessInputDelegate = OnProcessInputDelegate;
 	MPI.OnInputTouch = TouchScreenInputCallback;
 }
 
@@ -148,7 +150,10 @@ begin:
 
 State PlayerMovingCamera {
 	Function TouchScreenInputCallback(int Handle, ETouchType Type, Vector2D TouchLocation, float DeviceTimestamp, int TouchpadIndex){
-									
+		if (doOnce) {
+			doOnce = false;
+			 APP_Game(WorldInfo.game).getCamera().SetToFollowPlayerInputs(self); 
+		}
 		if (Type == Touch_Began)	{
 			Touches++;
 			if (Touches == 1) {
@@ -201,8 +206,9 @@ State PlayerMovingCamera {
 		//return false;
 	}
 begin:
-Touches = 0;
- APP_Game(WorldInfo.game).getCamera().SetToFollowPlayerInputs(self); 
+ Touches = 0;
+ 	APP_Game(WorldInfo.game).getCamera().GotoState('OverviewCamera');
+
  pawn.SetRotation(APP_Game(WorldInfo.game).getThrowingStation().Rotation); // reset rotation to horizontal
     
 }
@@ -266,5 +272,6 @@ begin:
 
 defaultproperties
 {
+  doOnce = true;
   InputClass=class'APP_PlayerInput'
 }

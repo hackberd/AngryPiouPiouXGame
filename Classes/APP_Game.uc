@@ -45,6 +45,7 @@ event InitGame( string Options, out string ErrorMessage )
 	
   local String bStartMenuOption;
   `log("Got Here");
+  
   super.InitGame(Options,ErrorMessage);
   BstartMenuOption = ParseOption( Options, "bStartMenu" ) ;
   if(bStartMenuOption==""){
@@ -91,7 +92,7 @@ static event class<GameInfo> SetGameType(string MapName, string Options, string 
 {
 	return super.SetGameType(MapName,Options, Portal); // could be used later to filter game map name, or force or override few default class at startup
 }
-  
+
 
 /** Game Actors Init*/
 

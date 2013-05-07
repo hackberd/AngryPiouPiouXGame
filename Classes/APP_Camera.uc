@@ -84,9 +84,33 @@ state FollowPlayerInputs extends ACTIVE {
 	}
 begin: 
 	if (setNormalCam) {
+		setNormalCam = false;
 			setLocation(PreviousCameraVector);
 		setRotation(PreviousCameraRotator);
 	}
+}
+
+state OverviewCamera extends ACTIVE {
+
+	event tick(float DeltatTime){
+	   local vector loc;
+	   local vector camX,camY,camZ;
+	   local rotator rot;
+	   getAxes(self.Rotation,camX,camY,camZ);
+	   // note: CamZ = Vertical (left/right) , CamY = Horizontal(up/down), CamX = depth (forward/backward)
+	   // note: ScreenVectorMovement.Y = vertical screen axis (positive Y-axis is pointing downward of screen)
+	   // note: ScreenVectorMovement.X = horizontal screen axis (positive X-axis is pointing Left of screen)
+	   loc = self.location  + camY * 30 + camX * ScreenVectorMovementZ;  
+	   setlocation(loc);
+	   rot = self.Rotation;
+	   rot.Yaw -= 100;
+	   self.SetRotation(rot);
+	}
+begin: 
+	setNormalCam = true;
+	PreviousCameraVector = self.location;
+	PreviousCameraRotator = self.rotation;
+	
 }
 
 
@@ -95,6 +119,9 @@ function followProjectFromBehind(actor a) {
 	PreviousCameraVector = self.Location;
 	PreviousCameraRotator = self.Rotation;
 	self.GotoState('ProjectFromBehind');
+}
+function setProjectile(actor a) {
+	ProjectileToFollow = a;
 }
 
 function setToNormalCam() {
@@ -196,6 +223,7 @@ function ToggleCamera()
   if(bFixedCameraOn)	 acquireTarget(PlayerController.Pawn,PlayerController);
   else                   releaseTarget(PlayerController);
 }
+
 function  AcquireTarget(actor Camtarget, PlayerController PC){
    self.Target = Camtarget;
    Maintarget = Camtarget;

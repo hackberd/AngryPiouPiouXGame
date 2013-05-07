@@ -83,12 +83,12 @@
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double2"/>
-      <double>111.31848050911323</double>
+      <double>79.20988840403976</double>
      </void>
     </void>
     <void method="setLocation">
      <double>1452.3337353764286</double>
-     <double>111.31848050911323</double>
+     <double>79.20988840403976</double>
     </void>
    </object>
   </void>
@@ -669,19 +669,19 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double22"/>
-      <double>1478.1451915165262</double>
+      <double>1480.5236057465315</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double22"/>
-      <double>668.8454025311491</double>
+      <double>652.1965029211111</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>1478.1451915165262</double>
-     <double>668.8454025311491</double>
+     <double>1480.5236057465315</double>
+     <double>652.1965029211111</double>
     </void>
    </object>
   </void>
@@ -727,19 +727,19 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double24"/>
-      <double>1651.2291228019585</double>
+      <double>1680.9593006770265</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double24"/>
-      <double>113.72553508936329</double>
+      <double>93.50901413431703</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>1651.2291228019585</double>
-     <double>113.72553508936329</double>
+     <double>1680.9593006770265</double>
+     <double>93.50901413431703</double>
     </void>
    </object>
   </void>
@@ -786,19 +786,19 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double26"/>
-      <double>380.24250828488795</double>
+      <double>379.05330116988523</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double26"/>
-      <double>123.9433825546109</double>
+      <double>106.10527582957012</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>380.24250828488795</double>
-     <double>123.9433825546109</double>
+     <double>379.05330116988523</double>
+     <double>106.10527582957012</double>
     </void>
    </object>
   </void>
@@ -960,30 +960,27 @@
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double32"/>
-      <double>1056.1715728752538</double>
+      <double>1059.0</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double32"/>
-      <double>603.3847763108503</double>
+      <double>585.0</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>1056.1715728752538</double>
-     <double>603.3847763108503</double>
+     <double>1059.0</double>
+     <double>585.0</double>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode" id="NoteNode0">
+   <object class="com.horstmann.violet.NoteNode">
     <void property="text">
      <void property="text">
-      <string>All Variables of the game 
-Hold Every Information in one Class
-Accessed by other classes/ Modify Variables 
-e.g. GameState.VARIABLES;</string>
+      <string>Saving the States of the Game, like &quot;isGameOver&quot; etc.</string>
      </void>
     </void>
    </object>
@@ -992,34 +989,29 @@ e.g. GameState.VARIABLES;</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double33"/>
-      <double>667.1451915165264</double>
+      <double>629.0905638364394</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double33"/>
-      <double>7.1352426900163195</double>
+      <double>187.8947241704299</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>667.1451915165264</double>
-     <double>7.1352426900163195</double>
+     <double>629.0905638364394</double>
+     <double>187.8947241704299</double>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.PointNode" id="PointNode0">
-    <void id="Rectangle2D$Double0" property="bounds">
-     <void method="setRect">
-      <double>742.0652397616979</double>
-      <double>139.13723245531835</double>
-      <double>0.0</double>
-      <double>0.0</double>
+   <object class="com.horstmann.violet.NoteNode">
+    <void property="text">
+     <void property="text">
+      <string>Menubuttons 
+--&gt; event onTouch entspricht einem Listener</string>
      </void>
-    </void>
-    <void property="bounds">
-     <object idref="Rectangle2D$Double0"/>
     </void>
    </object>
    <object class="java.awt.geom.Point2D$Double" id="Point2D$Double34">
@@ -1027,32 +1019,28 @@ e.g. GameState.VARIABLES;</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double34"/>
-      <double>742.0652397616979</double>
+      <double>789.6335243618067</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double34"/>
-      <double>139.13723245531835</double>
+      <double>952.5548991171795</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>742.0652397616979</double>
-     <double>139.13723245531835</double>
+     <double>789.6335243618067</double>
+     <double>952.5548991171795</double>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode" id="NoteNode1">
+   <object class="com.horstmann.violet.NoteNode">
     <void property="text">
      <void property="text">
-      <string>Apply rules, check if game is over, what to do
-Open Menus
-
-
-....OpenMenuScene(class&apos;NAMEOFMENU&apos;) opens menus
-</string>
+      <string>opens Menus:
+... .OpenMenuScene(class&apos;Menu&apos;)</string>
      </void>
     </void>
    </object>
@@ -1061,27 +1049,39 @@ Open Menus
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double35"/>
-      <double>592.2251432713551</double>
+      <double>776.5522460967768</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double35"/>
-      <double>342.4916491207836</double>
+      <double>535.1432017512244</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>592.2251432713551</double>
-     <double>342.4916491207836</double>
+     <double>776.5522460967768</double>
+     <double>535.1432017512244</double>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode" id="NoteNode2">
+   <object class="com.horstmann.violet.NoteNode">
     <void property="text">
      <void property="text">
-      <string>All Menus</string>
+      <string>Gameplayobject
+has native Objects --&gt; from c++
+
+components can be added to defauk properties
+--&gt; like Audio, Graphical, Physical components
+
+Example:
+DefaultProperties
+{
+Begin Object Name = StaticMeshComponent0
+  StaticMesh = StaticMesh(&apos;path&apos;)
+}
+--&gt; siehe Script</string>
      </void>
     </void>
    </object>
@@ -1090,40 +1090,32 @@ Open Menus
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double36"/>
-      <double>807.4716310868474</double>
+      <double>77.29846247517688</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double36"/>
-      <double>639.7934278714639</double>
+      <double>429.3037685159822</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>807.4716310868474</double>
-     <double>639.7934278714639</double>
+     <double>77.29846247517688</double>
+     <double>429.3037685159822</double>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode" id="NoteNode3">
+   <object class="com.horstmann.violet.NoteNode">
     <void property="text">
      <void property="text">
-      <string>Startmenü
+      <string>&quot;Placeable&quot; - eigenschaft =  level designer can place it
+bsp. Cameraactor
 
-play/load
-
-defaultProperties 
--&gt; Create user interface component (eg background)
--&gt; lable - add(object)
--&gt; button
-
-Interaction with button:
-event OnTouch(Sender -&gt; button pressed)
-if (Button is play button (Sender.Tag)
-
-</string>
+&quot;KActor spawnable&quot; =  during runtime --&gt; with diverse properties
+--&gt; s. throwingstation Spawn &amp; spawn function of  Projectile
+Collision Component of actor = clickable room. can be changed in editor</string>
      </void>
     </void>
    </object>
@@ -1132,34 +1124,38 @@ if (Button is play button (Sender.Tag)
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double37"/>
-      <double>870.4996081819916</double>
+      <double>1454.400301648328</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double37"/>
-      <double>912.121857207087</double>
+      <double>216.4356949304953</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>870.4996081819916</double>
-     <double>912.121857207087</double>
+     <double>1454.400301648328</double>
+     <double>216.4356949304953</double>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.PointNode" id="PointNode1">
-    <void id="Rectangle2D$Double1" property="bounds">
-     <void method="setRect">
-      <double>812.2284595468584</double>
-      <double>847.90467299694</double>
-      <double>0.0</double>
-      <double>0.0</double>
+   <object class="com.horstmann.violet.NoteNode">
+    <void property="text">
+     <void property="text">
+      <string>var() int Score
+or
+var(scoring system) int Score   --&gt;own categorie
+--&gt; editable variable
+
+s. state Destroyed_{
+ignores RigidBodyCollision; //ignore c++ envents
+
+begin: 
+         operations
+}</string>
      </void>
-    </void>
-    <void property="bounds">
-     <object idref="Rectangle2D$Double1"/>
     </void>
    </object>
    <object class="java.awt.geom.Point2D$Double" id="Point2D$Double38">
@@ -1167,34 +1163,31 @@ if (Button is play button (Sender.Tag)
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double38"/>
-      <double>812.2284595468584</double>
+      <double>1761.2157373190298</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double38"/>
-      <double>847.90467299694</double>
+      <double>501.84540253114824</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>812.2284595468584</double>
-     <double>847.90467299694</double>
+     <double>1761.2157373190298</double>
+     <double>501.84540253114824</double>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.PointNode" id="PointNode2">
-    <void id="Rectangle2D$Double2" property="bounds">
-     <void method="setRect">
-      <double>734.9299970716816</double>
-      <double>699.2537836216</double>
-      <double>0.0</double>
-      <double>0.0</double>
+   <object class="com.horstmann.violet.NoteNode">
+    <void property="text">
+     <void property="text">
+      <string>ACTORS ARE OBJECTS TO PUT IN WORLD
+----&gt;Block, Camera etc is an actor
+
+ptich, yaw , roll --&gt; rotation matrix in Euler angles</string>
      </void>
-    </void>
-    <void property="bounds">
-     <object idref="Rectangle2D$Double2"/>
     </void>
    </object>
    <object class="java.awt.geom.Point2D$Double" id="Point2D$Double39">
@@ -1202,34 +1195,28 @@ if (Button is play button (Sender.Tag)
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double39"/>
-      <double>734.9299970716816</double>
+      <double>82.05529093518777</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double39"/>
-      <double>699.2537836216</double>
+      <double>648.1178776764829</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>734.9299970716816</double>
-     <double>699.2537836216</double>
+     <double>82.05529093518777</double>
+     <double>648.1178776764829</double>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.PointNode" id="PointNode3">
-    <void id="Rectangle2D$Double3" property="bounds">
-     <void method="setRect">
-      <double>769.4170034067605</double>
-      <double>504.22381676115367</double>
-      <double>0.0</double>
-      <double>0.0</double>
+   <object class="com.horstmann.violet.NoteNode">
+    <void property="text">
+     <void property="text">
+      <string>event RigidBodyCollision --&gt;s. Block</string>
      </void>
-    </void>
-    <void property="bounds">
-     <object idref="Rectangle2D$Double3"/>
     </void>
    </object>
    <object class="java.awt.geom.Point2D$Double" id="Point2D$Double40">
@@ -1237,35 +1224,28 @@ if (Button is play button (Sender.Tag)
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double40"/>
-      <double>769.4170034067605</double>
+      <double>1677.9712392688393</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double40"/>
-      <double>504.22381676115367</double>
+      <double>689.7401267015781</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>769.4170034067605</double>
-     <double>504.22381676115367</double>
+     <double>1677.9712392688393</double>
+     <double>689.7401267015781</double>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode" id="NoteNode4">
+   <object class="com.horstmann.violet.NoteNode">
     <void property="text">
      <void property="text">
-      <string>Wie Java.Object
-
-Actor 
-GamePlay Obect 
--&gt; Can access game engine modules
--&gt; native c++ functions
-We add Components to actors (Component 
--&gt; Way of definig audio, visual, partical system usw. from actor
--&gt; add to defaultProperties</string>
+      <string>projectile is only placeable to shape it
+in world</string>
      </void>
     </void>
    </object>
@@ -1274,40 +1254,29 @@ We add Components to actors (Component
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double41"/>
-      <double>-2.4817002942735193</double>
+      <double>1437.7514020382898</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double41"/>
-      <double>24.487006335078902</double>
+      <double>547.0352729012517</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>-2.4817002942735193</double>
-     <double>24.487006335078902</double>
+     <double>1437.7514020382898</double>
+     <double>547.0352729012517</double>
     </void>
    </object>
   </void>
   <void method="addNode">
    <object class="com.horstmann.violet.NoteNode">
-    <void property="color">
-     <object class="java.awt.Color">
-      <int>255</int>
-      <int>239</int>
-      <int>213</int>
-      <int>255</int>
-     </object>
-    </void>
     <void property="text">
      <void property="text">
-      <string>Component System
-
-Begin Object Name = StaticMesh
-End Object
-
-components.add(StaticMesh)</string>
+      <string>event Postbeginplay() --&gt; use instead of constructor to 
+e.g. create and attach particelsystem
+event is called when actor is spawned</string>
      </void>
     </void>
    </object>
@@ -1316,54 +1285,19 @@ components.add(StaticMesh)</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double42"/>
-      <double>5.946035575013596</double>
+      <double>1141.638830402612</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double42"/>
-      <double>177.19186013540545</double>
+      <double>676.6588484365483</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>5.946035575013596</double>
-     <double>177.19186013540545</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.PointNode" id="PointNode4">
-    <void id="Rectangle2D$Double4" property="bounds">
-     <void method="setRect">
-      <double>440.00663255100676</double>
-      <double>158.1645462953619</double>
-      <double>0.0</double>
-      <double>0.0</double>
-     </void>
-    </void>
-    <void property="bounds">
-     <object idref="Rectangle2D$Double4"/>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double43">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double43"/>
-      <double>440.00663255100676</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double43"/>
-      <double>158.1645462953619</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>440.00663255100676</double>
-     <double>158.1645462953619</double>
+     <double>1141.638830402612</double>
+     <double>676.6588484365483</double>
     </void>
    </object>
   </void>
@@ -1371,8 +1305,38 @@ components.add(StaticMesh)</string>
    <object class="com.horstmann.violet.NoteNode">
     <void property="text">
      <void property="text">
-      <string>Add Mesh
-define in contentbrowser</string>
+      <string>Simple Player Controller</string>
+     </void>
+    </void>
+   </object>
+   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double43">
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>x</string>
+     <void method="set">
+      <object idref="Point2D$Double43"/>
+      <double>1569.7533918035917</double>
+     </void>
+    </void>
+    <void class="java.awt.geom.Point2D$Double" method="getField">
+     <string>y</string>
+     <void method="set">
+      <object idref="Point2D$Double43"/>
+      <double>805.093216856842</double>
+     </void>
+    </void>
+    <void method="setLocation">
+     <double>1569.7533918035917</double>
+     <double>805.093216856842</double>
+    </void>
+   </object>
+  </void>
+  <void method="addNode">
+   <object class="com.horstmann.violet.NoteNode">
+    <void property="text">
+     <void property="text">
+      <string>function-pointers !! s. code
+
+</string>
      </void>
     </void>
    </object>
@@ -1381,27 +1345,27 @@ define in contentbrowser</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double44"/>
-      <double>7.298462475176834</double>
+      <double>1442.5082304983005</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double44"/>
-      <double>271.1392222206203</double>
+      <double>950.1764848871741</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>7.298462475176834</double>
-     <double>271.1392222206203</double>
+     <double>1442.5082304983005</double>
+     <double>950.1764848871741</double>
     </void>
    </object>
   </void>
   <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode" id="NoteNode5">
+   <object class="com.horstmann.violet.NoteNode">
     <void property="text">
      <void property="text">
-      <string>Dynamic: Could move in Enviroment</string>
+      <string>responsible to update hudinfo</string>
      </void>
     </void>
    </object>
@@ -1410,596 +1374,19 @@ define in contentbrowser</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double45"/>
-      <double>1585.213084298627</double>
+      <double>1221.3157071077947</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double45"/>
-      <double>192.65155263044085</double>
+      <double>1050.0698825474028</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>1585.213084298627</double>
-     <double>192.65155263044085</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode" id="NoteNode6">
-    <void property="text">
-     <void property="text">
-      <string>placeable -&gt;
-Actors in Contentbrowser 
-Can be dropped in enviroment
-
-(UDK) Augen oben klicken -&gt; durch die augen des actors</string>
-     </void>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double46">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double46"/>
-      <double>1303.3709980429821</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double46"/>
-      <double>15.45969249503537</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>1303.3709980429821</double>
-     <double>15.45969249503537</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.PointNode" id="PointNode5">
-    <void id="Rectangle2D$Double5" property="bounds">
-     <void method="setRect">
-      <double>1476.9952368333795</double>
-      <double>109.40705458025033</double>
-      <double>0.0</double>
-      <double>0.0</double>
-     </void>
-    </void>
-    <void property="bounds">
-     <object idref="Rectangle2D$Double5"/>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double47">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double47"/>
-      <double>1476.9952368333795</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double47"/>
-      <double>109.40705458025033</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>1476.9952368333795</double>
-     <double>109.40705458025033</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode" id="NoteNode7">
-    <void property="text">
-     <void property="text">
-      <string>Has Collison Cylinder 
-dobleklick  Properties? -&gt; 
-Collision Compomnent 
--&gt;settings can be edited</string>
-     </void>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double48">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double48"/>
-      <double>1645.8626471637656</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double48"/>
-      <double>387.68151949088707</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>1645.8626471637656</double>
-     <double>387.68151949088707</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode" id="NoteNode8">
-    <void property="text">
-     <void property="text">
-      <string>has properties 
-Impact force for destruction</string>
-     </void>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double49">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double49"/>
-      <double>1314.0738620780066</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double49"/>
-      <double>428.1145614009795</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>1314.0738620780066</double>
-     <double>428.1145614009795</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.PointNode" id="PointNode6">
-    <void id="Rectangle2D$Double6" property="bounds">
-     <void method="setRect">
-      <double>1393.750738783189</double>
-      <double>501.84540253114824</double>
-      <double>0.0</double>
-      <double>0.0</double>
-     </void>
-    </void>
-    <void property="bounds">
-     <object idref="Rectangle2D$Double6"/>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double50">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double50"/>
-      <double>1393.750738783189</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double50"/>
-      <double>501.84540253114824</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>1393.750738783189</double>
-     <double>501.84540253114824</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode" id="NoteNode9">
-    <void property="color">
-     <object class="java.awt.Color">
-      <int>255</int>
-      <int>69</int>
-      <int>0</int>
-      <int>255</int>
-     </object>
-    </void>
-    <void property="text">
-     <void property="text">
-      <string>Red Acsis is direction of bulltes!!</string>
-     </void>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double51">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double51"/>
-      <double>1328.3443474580395</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double51"/>
-      <double>243.78745857555782</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>1328.3443474580395</double>
-     <double>243.78745857555782</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.PointNode" id="PointNode7">
-    <void id="Rectangle2D$Double7" property="bounds">
-     <void method="setRect">
-      <double>1536.4555925835155</double>
-      <double>352.0053060408054</double>
-      <double>0.0</double>
-      <double>0.0</double>
-     </void>
-    </void>
-    <void property="bounds">
-     <object idref="Rectangle2D$Double7"/>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double52">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double52"/>
-      <double>1536.4555925835155</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double52"/>
-      <double>352.0053060408054</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>1536.4555925835155</double>
-     <double>352.0053060408054</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode" id="NoteNode10">
-    <void property="text">
-     <void property="text">
-      <string>Actor Classes CB
--&gt; Default Block
-12ter Button for changing scale
-
-Properties 
--&gt; APP Block
-Score and Destruction Fore Needed
-
-in Class:
-var(SCORING_SYSTEM) int Score;
-wenn irgendwas in SCORING_SYSTEM
-DANN IN UDK in properties
-</string>
-     </void>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double53">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double53"/>
-      <double>1681.5388606138474</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double53"/>
-      <double>575.576243661317</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>1681.5388606138474</double>
-     <double>575.576243661317</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode">
-    <void property="color">
-     <object class="java.awt.Color">
-      <int>178</int>
-      <int>34</int>
-      <int>34</int>
-      <int>255</int>
-     </object>
-    </void>
-    <void property="text">
-     <void property="text">
-      <string>Hold L key - Look around Model
-Space Bar - Different Modes (12.Button Non All Scale)</string>
-     </void>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double54">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double54"/>
-      <double>972.7714200722257</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double54"/>
-      <double>363.8973771908326</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>972.7714200722257</double>
-     <double>363.8973771908326</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode">
-    <void property="text">
-     <void property="text">
-      <string>1 Meter = 50 UU
-Lefthanded (daumen = x, zeigefinger y, mf = z)</string>
-     </void>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double55">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double55"/>
-      <double>14.167199315764655</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double55"/>
-      <double>556.5489298212734</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>14.167199315764655</double>
-     <double>556.5489298212734</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode">
-    <void property="text">
-     <void property="text">
-      <string>Actors General
-Location-&gt; setLocation(Vector)
-
-Rotation -&gt;  self.setRotation(new rotation)
--&gt; Pitch(up down nose) x, Roll(schwenken links rechts), Yaw(left right look)</string>
-     </void>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double56">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double56"/>
-      <double>6.065903016798742</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double56"/>
-      <double>605.3064215363851</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>6.065903016798742</double>
-     <double>605.3064215363851</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode" id="NoteNode11">
-    <void property="text">
-     <void property="text">
-      <string>KActorSpawnable -&gt; Physics does everything
-eg: AppBlock
-RigidBodyColission
-
-Create Actors: (Spawn)
-Spawn(Class what spwn, owner, name, location, rotation)
-Destroy()
-
-New if Class Object
-
-</string>
-     </void>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double57">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double57"/>
-      <double>1117.8546881025575</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double57"/>
-      <double>638.6042207564612</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>1117.8546881025575</double>
-     <double>638.6042207564612</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.PointNode" id="PointNode8">
-    <void id="Rectangle2D$Double8" property="bounds">
-     <void method="setRect">
-      <double>1532.8879712385074</double>
-      <double>694.4969551615891</double>
-      <double>0.0</double>
-      <double>0.0</double>
-     </void>
-    </void>
-    <void property="bounds">
-     <object idref="Rectangle2D$Double8"/>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double58">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double58"/>
-      <double>1532.8879712385074</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double58"/>
-      <double>694.4969551615891</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>1532.8879712385074</double>
-     <double>694.4969551615891</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.PointNode" id="PointNode9">
-    <void id="Rectangle2D$Double9" property="bounds">
-     <void method="setRect">
-      <double>1349.7500755280882</double>
-      <double>698.0645765065972</double>
-      <double>0.0</double>
-      <double>0.0</double>
-     </void>
-    </void>
-    <void property="bounds">
-     <object idref="Rectangle2D$Double9"/>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double59">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double59"/>
-      <double>1349.7500755280882</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double59"/>
-      <double>698.0645765065972</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>1349.7500755280882</double>
-     <double>698.0645765065972</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode" id="NoteNode12">
-    <void property="text">
-     <void property="text">
-      <string>In charge of controlling the pawn (here cannon)
-Reciewve Input from Class PlayerInput
--&gt; Aiming, Changing Camera or else? decides what to do in differetnt stuf</string>
-     </void>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double60">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double60"/>
-      <double>1624.4569190937168</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double60"/>
-      <double>953.7441062321823</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>1624.4569190937168</double>
-     <double>953.7441062321823</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.PointNode" id="PointNode10">
-    <void id="Rectangle2D$Double10" property="bounds">
-     <void method="setRect">
-      <double>1531.6987641235046</double>
-      <double>889.5269220220353</double>
-      <double>0.0</double>
-      <double>0.0</double>
-     </void>
-    </void>
-    <void property="bounds">
-     <object idref="Rectangle2D$Double10"/>
-    </void>
-   </object>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double61">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double61"/>
-      <double>1531.6987641235046</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double61"/>
-      <double>889.5269220220353</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>1531.6987641235046</double>
-     <double>889.5269220220353</double>
-    </void>
-   </object>
-  </void>
-  <void method="addNode">
-   <object class="com.horstmann.violet.NoteNode"/>
-   <object class="java.awt.geom.Point2D$Double" id="Point2D$Double62">
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>x</string>
-     <void method="set">
-      <object idref="Point2D$Double62"/>
-      <double>523.2511306011972</double>
-     </void>
-    </void>
-    <void class="java.awt.geom.Point2D$Double" method="getField">
-     <string>y</string>
-     <void method="set">
-      <object idref="Point2D$Double62"/>
-      <double>1122.6115165625688</double>
-     </void>
-    </void>
-    <void method="setLocation">
-     <double>523.2511306011972</double>
-     <double>1122.6115165625688</double>
+     <double>1221.3157071077947</double>
+     <double>1050.0698825474028</double>
     </void>
    </object>
   </void>
@@ -2416,76 +1803,6 @@ Reciewve Input from Class PlayerInput
    </object>
    <object idref="ClassNode32"/>
    <object idref="ClassNode0"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.NoteEdge"/>
-   <object idref="NoteNode0"/>
-   <object idref="PointNode0"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.NoteEdge"/>
-   <object idref="NoteNode3"/>
-   <object idref="PointNode1"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.NoteEdge"/>
-   <object idref="NoteNode2"/>
-   <object idref="PointNode2"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.NoteEdge"/>
-   <object idref="NoteNode1"/>
-   <object idref="PointNode3"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.NoteEdge"/>
-   <object idref="NoteNode4"/>
-   <object idref="PointNode4"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.NoteEdge"/>
-   <object idref="NoteNode6"/>
-   <object idref="PointNode5"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.NoteEdge"/>
-   <object idref="ClassNode24"/>
-   <object idref="NoteNode5"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.NoteEdge"/>
-   <object idref="ClassNode21"/>
-   <object idref="NoteNode7"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.NoteEdge"/>
-   <object idref="NoteNode8"/>
-   <object idref="PointNode6"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.NoteEdge"/>
-   <object idref="NoteNode9"/>
-   <object idref="PointNode7"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.NoteEdge"/>
-   <object idref="ClassNode3"/>
-   <object idref="NoteNode10"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.NoteEdge"/>
-   <object idref="NoteNode11"/>
-   <object idref="PointNode8"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.NoteEdge"/>
-   <object idref="NoteNode11"/>
-   <object idref="PointNode9"/>
-  </void>
-  <void method="connect">
-   <object class="com.horstmann.violet.NoteEdge"/>
-   <object idref="NoteNode12"/>
-   <object idref="PointNode10"/>
   </void>
  </object>
 </java>

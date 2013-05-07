@@ -28,13 +28,17 @@ var class<APP_GameStateController> GameStateControllerClass;
 var class<APP_GameStateData>       GameStateDataClass;
 var class<APP_Camera>              GameMainCameraClass;
 var class<APP_ThrowingStation>     GameMainThrowingClass;
+var class<APP_Level> AllLevels;
 
 var name       GameStateControllerTag;
 var name       GameStateDataTag;
 var name       GameMainCameraTag;
 var name       GameMainThrowingTag;
 
+
+
 var bool       bStartMenu;
+
 
 event InitGame( string Options, out string ErrorMessage )
 {
@@ -106,6 +110,8 @@ function InitUDKGameActors()
 
 
 function InitGameActors(){
+
+
 
 GamePlayerControler    = getPlayerController();
 GamePlayerPawn          = getGamePlayerPawn();
@@ -197,9 +203,14 @@ function APP_PlayerPawn getGamePlayerPawn(){
    return GamePlayerPawn;
 }
 
+
+
 function APP_GameStateData getGameStateData(){
-	if(GameStateData==none)
-	GameStateData =new GameStateDataClass ;
+	if(GameStateData==none) {
+		GameStateData =new GameStateDataClass;
+		`log("LOADING GAMESTATE DURING START");
+		GameStateData.LoadSavedGame();
+	}
 	return GameStateData;
 }
 
@@ -227,7 +238,7 @@ defaultproperties
 	GameMainThrowingClass               =class'APP_ThrowingStation'
 
 	/*Game Actor Tag for in-level retrieval (ie.if already placed in map)*/
-	// name Variablen werden mit "" deklariert
+
 	GameStateControllerTag          ="GAME_CONTROLLER"
 	GameStateDataTag                ="GAME_STATE"
 	GameMainCameraTag               ="MAIN_CAMERA"

@@ -1,0 +1,66 @@
+/*
+  
+  -http://www.youtube.com/watch?v=UE8kk3_o660
+
+   -http://udn.epicgames.com/Three/AppleiOSProvisioningSetup.html#Generating Certificate Request and Key pair
+
+  - https://developer.apple.com/account/ios/certificate/certificateList.action
+
+   - Application Settings : UTFront End
+
+  - ipa generation : C:\UDK\UDK-2013-02-APP-WorkingCopy\Binaries\IPhone\iPhonePackager.exe
+
+  - !!! script have to be compiled in RELEASE MODE
+
+
+*/
+
+
+
+JLL_1
+
+Immanuel pelzer
+
+a9ce93510b31574f574979151b9403835ae1a2d0
+
+
+JLL_2
+
+Lara Luttmer
+
+2610fec754e46dbbd8db2a5a1f0ea02d98beee57
+
+
+JLL_3
+
+Ruben Schmidt
+
+5f0dbf8686f1e35ac1dcd87b67f1d3fdbb8172bd
+
+JLL_4
+
+Raphael Hoffmann
+
+351015eb84c0fa4120ffa32100327c6eee5d916b
+
+JLL_5
+
+Philipp Schröder
+
+f259eef8127ac628bdfd88c5e381d9948cfc14b0
+
+
+JLL_6
+
+Stefan Ludwig
+
+76c1eb7dc67ee49402cd71f98400e4959b67c3b9
+
+
+
+JLL_7
+
+Ruben Schmidt
+
+UDID:
+5f0dbf8686f1e35ac1dcd87b67f1d3fdbb8172bd

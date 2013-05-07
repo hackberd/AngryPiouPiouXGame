@@ -19,17 +19,22 @@ class APP_GameStateController extends Actor;
 var MobileMenuScene CurrentMenu;
 var array<APP_Target> Targets;
 var APP_GameStateData GameState;
+
+
+
+
+
+//var String NextLevelMap ;   //TODO Multiple level management (with Menu to select them, save player progression )
+var bool bShouldDiplayStartMenu;
+
 var bool bForceWin;
 var bool bForceLoose;
-
-var String NextLevelMap ;   //TODO Multiple level management (with Menu to select them, save player progression )
-var bool bShouldDiplayStartMenu;
 
 /* Init*/
 function init(APP_GameStateData GS, bool bStartMenu){
     GameState = GS;
 	bShouldDiplayStartMenu=bStartMenu;
-	bForceWin = false;
+
 	gotostate('GameInit');
 }
 
@@ -37,17 +42,21 @@ function init(APP_GameStateData GS, bool bStartMenu){
 
 State GameInit
 {	
-	Begin:
+Begin:
    
     GameState.reset();
     GameState.nbTargetLeft = InitTargets();
     GameState.nbProjLeft   = APP_Game(worldInfo.Game).getThrowingStation().ProjectileNumber;
 	if(bShouldDiplayStartMenu){
-    CurrentMenu            = APP_GAME(worldinfo.game).getPlayerController().MPI.OpenMenuScene(class'APP_Menu_Start');
+		CurrentMenu            = APP_GAME(worldinfo.game).getPlayerController().MPI.OpenMenuScene(class'APP_Menu_Start');
 	}
 	else{
-	RunGame();
+		RunGame();
 	}
+}
+
+function LoadRightLevel() {
+	LoadNextLevel();
 }
 
 function RunGame(){
@@ -69,6 +78,7 @@ begin:
 }
 
 
+
 State GameResults 
 {
 begin:
@@ -87,34 +97,40 @@ begin:
 	}	
 }
 
-State GameWaitingTransition {
-	begin:
+State GameWaitingTransition
+{
+begin:
 	sleep(4.0);
     self.gotostate('GameResults');
 }
-
 
 /* In-state Function - Game RUNNIG*/
 
 function bool IsGameOver(out APP_GameStateData GS)
 {
-	if (bForceWin) {
-	GameState.bIsGameOver = true;
-	GameState.GameOverReason = "WON";
-	gotostate('GameResults');
+
+	//DEBUG options exec Win / loose
+	if(bForceWin)
+	{
+		GameState.bIsGameOver =  true;
+		GameState.GameOverReason = "WON";
+		return true;
 	}
-	if (bForceLoose) {
-	GameState.bIsGameOver = true;
-	GameState.GameOverReason = "LOST";
-	gotostate('GameResults');
+	if(bForceLoose)
+	{
+		GameState.bIsGameOver = true;
+		GameState.GameOverReason = "LOST";
+		return true;
 	}
 
-     if(AllTargetDead(GS,"WON")) return true;
-		 //Winning Conditions
-	 //Losing Conditions
-	 if(!HasProjectileLeft(GS,"LOST")) return true;
-  
+  //Winning Conditions
+  if(AllTargetDead(GS,"WON")) return true;
+	
+  //Losing Conditions
+   if(!HasProjectileLeft(GS,"LOST")) return true;
+
   return false;
+	
 	
 	
 }
@@ -129,11 +145,11 @@ Function bool AllTargetDead(APP_GameStateData GS, String Reason)
 
 	 bAllDead=true;
 	 foreach Targets(TargetTemp){ 
-		 if(TargetTemp.bisDead){ 
-		  }else {
-				bAllDead=false ;
-				TargetNotDead++;
-		 }
+     if(TargetTemp.bisDead){ 
+     }else {
+     	bAllDead=false ;
+        TargetNotDead++;
+     }
 	}
 	GS.nbTargetLeft = TargetNotDead;
 	if(bAllDead){
@@ -155,6 +171,11 @@ Function bool HasProjectileLeft(APP_GameStateData GS, String Reason)
 	}
 }
 
+function ShowLevelSelection()
+{
+	CurrentMenu  = APP_GAME(worldinfo.game).getPlayerController().MPI.OpenMenuScene(class'APP_Menu_LevelSelection');
+}
+
 /* Level Management*/
 
 function LoadLevel(string LevelName)
@@ -167,9 +188,14 @@ function LoadLevel(string LevelName)
 /* In state function - Game Transition*/
 function LoadNextLevel()
 {
+	local string level;
     // save player data (score,name) //TODO
 	//load next map
-	LoadLevel(NextLevelMap$"?bStartMenu=false"); //will destroy nearly all objects before reloading new map
+	level = APP_Game(worldInfo.Game).getGameStateData().getNextLevel();
+	APP_Game(worldInfo.Game).getGameStateData().SaveGame();
+	`log("LOADING LEVEL "$level);
+	LoadLevel(level$"?bStartMenu=false"); //will destroy nearly all objects before reloading new map
+	
 }
 
 function ReloadSameLevel()
@@ -188,10 +214,9 @@ function  int InitTargets()
 	local  APP_Target TargetTemp;
 	
 	// see http://udn.epicgames.com/Three/UnrealScriptIterators.html
-	// Hier iteriert über alle Actors die class 'APP_Target'
+	
 	foreach AllActors(class 'APP_Target',TargetTemp) //slow but we dont care, as running at init
 	{ 
-		// Speichert alle Tartges in Targets
      Targets.AddItem(TargetTemp); //cache target in game @init == if target dynamically created need to empty stact and reset it !!
 	}	
 	 return Targets.Length;
@@ -199,5 +224,6 @@ function  int InitTargets()
 
 DefaultProperties
 {
- NextLevelMap = "APP-Blank-Map.udk" 
+    bForceWin = false;
+	bForceLoose = false;
 }

@@ -31,7 +31,6 @@ function init(APP_GameStateData GS){
 }
 
 /** State */
-// Only one state, called by Graphics engie after every frame
 STATE Drawing{
 function DrawHUD(){
    super.DrawHUD();
@@ -76,7 +75,6 @@ function UpdateHUDConfig() // Use one State and multi-HUD config system for gene
 }
 
 function UpdateHUDitems(){
-	// Holt sich die Variablen aus der Gamestate und setzt sie
    ProjectileScore.setValue(GameState.nbProjLeft);
    TargetScore    .setValue(GameState.nbTargetLeft);
    Score.setValue(GameState.score);

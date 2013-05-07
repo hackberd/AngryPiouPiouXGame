@@ -25,8 +25,11 @@ event OnTouch(MobileMenuObject Sender, ETouchType EventType, float TouchX, float
    }else if(Sender.Tag ~= "PLAY"){
 	  game = APP_GAME(InputOwner.Outer.worldinfo.Game); //TODO refactor long casting
 	  game.getGameStateController().RunGame();
+	  game.getGameStateData().init();
+	  game.getGameStateData().initreset();
 	  bTouchHandled=true;
-      InputOwner.CloseMenuScene(self);// always at the end , as it will put the inputowner to none    
+	  InputOwner.CloseMenuScene(self);                              
+      // always at the end , as it will put the inputowner to none    
    }else if(Sender.Tag ~= "LOAD"){
 	  game = APP_GAME(InputOwner.Outer.worldinfo.Game); //TODO refactor long casting
 	  /*
@@ -35,7 +38,9 @@ event OnTouch(MobileMenuObject Sender, ETouchType EventType, float TouchX, float
 	  game.getGameStateData().LoadSavedGame();
 	  game.getGameStateController().RunGame();
 	  bTouchHandled=true;
-      InputOwner.CloseMenuScene(self);// always at the end , as it will put the inputowner to none    
+      InputOwner.CloseMenuScene(self);
+	  game.getGameStateController().ShowLevelSelection();
+      // always at the end , as it will put the inputowner to none    
    }
 }
 
@@ -90,9 +95,9 @@ defaultproperties
 
    Begin Object Class=MobileMenuButton Name=PlayButton
       Tag="PLAY"
-	  Caption="Play"
+	  Caption="New Game"
 	  CaptionColor=(R=255,G=0,B=0,A=127);
-      Left=0.35
+      Left=0.15
       Top=0.35
       Width=300
       Height=200
@@ -110,7 +115,7 @@ defaultproperties
       Tag="LOAD"
 	  Caption="LOAD SAVE GAME"
 	  CaptionColor=(R=255,G=0,B=0,A=127);
-      Left=0.35
+      Left=0.15
       Top=0.7
       Width=300
       Height=200
@@ -123,4 +128,6 @@ defaultproperties
       ImagesUVs(1)=(bCustomCoords=true,U=306,V=271,UL=310,VL=48)
    End Object
    MenuObjects.Add(LoadButton)
+
+
 }

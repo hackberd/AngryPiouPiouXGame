@@ -25,58 +25,53 @@
  * @author JLL
  * @version 1.0 April 3, 2013.
  */
-								// makes it physics
+
 class APP_Projectile  extends KActorSpawnable ClassGroup(AngryPiouPiou)
-	placeable; // Placeable, damit man project in UDK angucken kann
+	placeable;
 
 var ParticleSystemComponent TrailParticleSystem;
-var() float Gravity;
 
-
-// simulated -> Art Konstruktor 
-// Dannach direkt auto state
 simulated event Postbeginplay(){
    super.PostBeginPlay(); //dont lost previous initialisation (i.e. parent's constructor-like)
-   // Acticate ParticalSystem (pfad folger)
    TrailParticleSystem.SetActive(true);
 }
 
-// auto state setzt diesen State beim laden
 auto state Projected{
 
 event RigidBodyCollision( PrimitiveComponent HitComponent, PrimitiveComponent OtherComponent,
 				const out CollisionImpactData RigidCollisionData, int ContactIndex ){
-	 self.GotoState('Destroyed_');
+	 self.GotoState('Destroyed_');	
  }
 }
 
 State Destroyed_{
 	ignores RigidBodyCollision;
-	// ALles nach begin
-	begin:
-	// deaktivates pfad follow thing of projectile
-	TrailParticleSystem.SetActive(false);
-	// no self.delete() because after hit, should fall
-	APP_Game(WorldInfo.game).getThrowingStation().resetGravity();
+begin:
+ TrailParticleSystem.SetActive(false);
+}
+
+/**Special Effect**/
+function SpecialEffect()
+{
+	/*Stub function for Child to override*/
 }
 
 DefaultProperties
 {     
-
 	  LifeSpan              =4.0 //automaticall destroyed after 4 sec
 	  bEnableMobileTouch    =True
       DrawScale             =0.2
-	  Gravity = -520;
 
 	 Begin Object Name=StaticMeshComponent0
             StaticMesh      =StaticMesh'AngryPiouPiouXAllAssets.StaticMeshes.Sphere'
         	Materials(0)    =Material'AngryPiouPiouXAllAssets.Materials.M_BlockWall_02_D'
-			PhysMaterialOverride=PhysicalMaterial'AngryPiouPiouXAllAssets.PhysicalMaterials.PM_Projectile'
+
+			PhyMaterialOverride=PhysicalMaterial'AngryPiouPiouXAllAssets.PhysicalMaterials.PM_Projectile'
+								
 		    bNotifyRigidBodyCollision=true // necessary to trigger Event RigiBodyCollision
 		    ScriptRigidBodyCollisionThreshold=10.0// necessary to trigger Event RigiBodyCollision
      End Object
       
-	// Das ist der pfad, aber nicht aktiviert
 	Begin Object Class=ParticleSystemComponent Name=TrailParticleComponent0
 		Template      =ParticleSystem'AngryPiouPiouXAllAssets.ParticleSystem.ProjectileTrail'
 		bAutoActivate =false

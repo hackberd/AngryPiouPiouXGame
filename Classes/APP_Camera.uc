@@ -21,6 +21,7 @@ var bool bFixedCameraOn;
 var actor  target;
 var actor  Previoustarget;
 var actor  Maintarget;
+var actor ProjectileToFollow;
 
 var actor  Projectiletarget;
 var float  ProjFollowinDuration;
@@ -61,6 +62,9 @@ state FollowProjectile extends ACTIVE {
   }
 	event tick(float DeltatTime){
 	   local rotator rot;
+	   //local vector DirectionCamToProj
+	   // AB =B-A
+	   //
 	   rot = rotator ( Projectiletarget.location - self.location);
 	   setRotation(rot);
 	}
@@ -82,6 +86,26 @@ state FollowPlayerInputs extends ACTIVE {
 	   ScreenVectorMovement.X  = 0; // otherwise keep moving even after touch
 	   ScreenVectorMovement.Y  = 0; // otherwise keep moving even after touch
 	   setlocation(loc);
+	}
+begin: 
+}
+
+
+function followProjectFromBehind(actor a) {
+	ProjectileToFollow = a;
+	self.GotoState('ProjectFromBehind');
+}
+
+state ProjectFromBehind extends ACTIVE {
+
+	event tick(float DeltatTime){
+	   local vector loc;
+	   local vector camX,camY,camZ;
+	   getAxes(ProjectileToFollow.Rotation,camX,camY,camZ);
+
+	   loc = ProjectileToFollow.location + camZ * -1 * ScreenVectorMovement.Y + camY * ScreenVectorMovement.X;  
+	   setlocation(loc);
+	   setRotation(rotator(camX));
 	}
 begin: 
 }

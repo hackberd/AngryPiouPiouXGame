@@ -51,41 +51,47 @@ function PostThrowingPhase(){
 
 /** exec functions for debugging */
 
-exec function win() {
-	APP_Game(worldinfo.Game).getGameStateController().bForceWin = true;
-
-	
-}
-
-exec function loose() {
-	APP_Game(worldinfo.Game).getGameStateController().bForceLoose = true;
-
-}
-
-
 exec function ThrowProj(){
     APP_Game(WorldInfo.game).getThrowingStation().ThrowProjectileFrom(Swipe2DVector3D,pawn.location);
 }
+
+exec function PauseMenu(){
+	APP_Game(WorldInfo.game).getThrowingStation().setGameSpeed(0.0);
+	APP_Game(WorldInfo.game).getGameStateController().CurrentMenu = APP_GAME(worldinfo.game).getPlayerController().MPI.OpenMenuScene(class'APP_Menu_GameMenu');
+}
+
 exec function MoveCamera(){
    self.gotostate('PlayerMovingCamera');
 }
+exec function Win(){
+	APP_Game(WorldInfo.game).getGameStateController().bForceWin = true;
+}
+exec function Loose(){
+APP_Game(WorldInfo.game).getGameStateController().bForceLoose = true;
+}
 
+exec function SpecialEffect()
+{
+	APP_Game(WorldInfo.game).getThrowingStation().LastProjectileThrown.SpecialEffect();
+}
+
+exec function OpenInGameMenu(){
+APP_GAME(worldinfo.Game).getPlayerController().MPI.OpenMenuScene(class'APP_Menu_GameMenu');
+}
 /** Player Inputs Event*/
 /******************************* Player Pawn interaction handling ( event-driven inputkey mapped processing) */
 
 /** ini mobile input zone (set up from DefaultGame.ini) */
 
 function SetupZones(){
-	// DIE Zine, die man anklicken kann
+
 	super.SetupZones();
-	// What function to call 
-	FreeLookZone.OnTapDelegate          =  MobilePlayerInput(PlayerInput).ProcessWorldTouch; // to trigger Onmobileinput event on actor beim berphren das heir
+	FreeLookZone.OnTapDelegate          =  MobilePlayerInput(PlayerInput).ProcessWorldTouch; // to trigger Onmobileinput event on actor
 	FreeLookZone.OnProcessInputDelegate = TouchScreenInputCallback;
 }
 
 /** Player Touch Screen events  handling*/
-// diese funktion übercshreibt delegate (also selbe parameter)
-// Callback -> Calls a Function, 1. Eigene funcion deklarieren 2. wenn funcion gecallt wird, dann -> eigene funct wird genutzt
+
 Function bool TouchScreenInputCallback(MobileInputZone Zone,
 								float DeltaTime,
 								int Handle,
@@ -141,9 +147,6 @@ begin:
 
 State PlayerMovingCamera {
 
-	/// TouchScreenInputCallback
-	// Function Pointer -> Deligate in UDK
-	// 
 	Function bool TouchScreenInputCallback(MobileInputZone Zone,
 									float DeltaTime,
 									int Handle,
@@ -163,11 +166,9 @@ State PlayerMovingCamera {
 		}
 		return false;
 	}
-	begin:
-	 APP_Game(WorldInfo.game)
-		.getCamera()
-		.SetToFollowPlayerInputs(self); 
-	 pawn.SetRotation(APP_Game(WorldInfo.game).getThrowingStation().Rotation); // reset rotation to horizontal
+begin:
+ APP_Game(WorldInfo.game).getCamera().SetToFollowPlayerInputs(self); 
+ pawn.SetRotation(APP_Game(WorldInfo.game).getThrowingStation().Rotation); // reset rotation to horizontal
     
 }
 
@@ -187,10 +188,10 @@ State PlayerThrowing{
 		}else if(EventType == Touch_Moved){
 			EndTouch2DVector=TouchLocation;
 			Swipe2DVector       = class 'APP_MathUtils'.static.getVectorDir(StartTouch2DVector ,EndTouch2DVector);
-
 			newPawnRotation     = APP_Game(WorldInfo.game).getThrowingStation().getElevation(StartTouch2DVector,EndTouch2DVector,pawn.rotation);
 			pawn.SetRotation(newPawnRotation);
-			APP_PlayerPawn(Pawn).ScaleX(Swipe2DVector);
+			//TODO DEBUG
+			//APP_PlayerPawn(Pawn).ScaleX(Swipe2DVector);
 			return true; //input handled no further proceessing
 		}else if (EventType == Touch_Ended){
 			  APP_Game(WorldInfo.game).getThrowingStation().ThrowProjectile(pawn.rotation,
@@ -202,6 +203,8 @@ State PlayerThrowing{
 		return false; // input not handled
 	}	
 begin:
+	
+	
 }
 
 
@@ -214,6 +217,7 @@ state PlayerWaitingResult{
 									Vector2D TouchLocation){
 		if (EventType == Touch_Began){
 			//TODO: trigger a projectile's option when touch screen while projectile is in the air
+			APP_Game(WorldInfo.game).getThrowingStation().LastProjectileThrown.SpecialEffect();
 			return true; //input handled no further proceessing
 		}
 		return false; // input not handled
@@ -223,7 +227,11 @@ begin:
 
 	LastProjectileThrown = APP_Game(worldinfo.Game).getThrowingStation().LastProjectileThrown;
 	APP_Game(worldinfo.Game).getThrowingStation().ReActivate();
-	APP_Game(WorldInfo.game).getCamera().SetToFollowProjectile(LastProjectileThrown,6.0);
+	//APP_Game(worldinfo.Game).getCamera().followProjectFromBehind(
+	//	APP_Game(worldinfo.Game).getThrowingStation().LastProjectileThrown
+	//	);
+	//DEBUG TODO uncomment
+	//APP_Game(WorldInfo.game).getCamera().SetToFollowProjectile(LastProjectileThrown,6.0);
 	sleep(3.0); // hardcoded waiting time
 	self.gotostate('PlayerMovingCamera');
 }

@@ -21,15 +21,41 @@ var public bool     bIsGameOver;
 var public bool     bIsGameStarted;
 var public bool     bIsGamePaused;
 
+var int LevelIndex;
+var array<string>  Levels;
+var array<bool>  LevelsComplete;
+
 function init(){
-	  reset(); // just as security
+	Levels.AddItem("APP-Level-0.udk");
+	Levels.AddItem("APP-Level-1.udk");
+	Levels.AddItem("APP-Level-2.udk");
+	Levels.AddItem("APP-Level-3.udk");
+	Levels.AddItem("APP-Level-4.udk");
+
+	reset(); // just as security
 }
 
 function reset(){ 
-	Score           = 0;
 	bIsGameOver     = false;
 	bIsGameStarted  = false;
 	bIsGamePaused   = false;
+	
+}
+
+exec function initreset() {
+	 local array<bool>  LevelsCompletes;
+	`log("RESETTING GAME STATE DATA");
+	Score           = 0;
+
+	LevelsCompletes.AddItem(false);
+	LevelsCompletes.addItem(false);
+	LevelsCompletes.AddItem(false);
+	LevelsCompletes.AddItem(false);
+	LevelsCompletes.AddItem(false);
+
+	self.LevelsComplete = LevelsCompletes;
+	self.LevelIndex = 0;
+	SaveGame();
 }
 
 /** Saving/loading functions example*/
@@ -38,14 +64,35 @@ function reset(){
 * */
 
 function SaveGame(){
-class'Engine'.static.BasicSaveObject(self, "APP_SavedGame.bin", true, 0);
+	`log("SAVING DATA, LEVEL"$LevelIndex);
+	class'Engine'.static.BasicSaveObject(self, "APP_SavedGame1.bin", true, 0);
 }
 Function LoadSavedGame(){
  local APP_GameStateData TempGameState;
  TempGameState = new class'APP_GameStateData';
- if(class'Engine'.static.BasicLoadObject(TempGameState, "APP_SavedGame.bin", true, 0)){
- self.score = TempGameState.Score; // just for example (should have an overall score (i.e. cumulated for each map)
+ if(class'Engine'.static.BasicLoadObject(TempGameState, "APP_SavedGame1.bin", true, 0)){
+	
+	self.score = TempGameState.Score; // just for example (should have an overall score (i.e. cumulated for each map)
+	self.LevelIndex = TempGameState.LevelIndex;
+	self.LevelsComplete = TempGameState.LevelsComplete;
+	`log("LOADING DATA, LEVEL "$LevelIndex);
  }
+ else {
+	initreset();
+ }
+}
+
+function string getNextLevel(){
+	local string level;
+
+	self.LevelsComplete[LevelIndex] = true;
+	LevelIndex++;
+	level = Levels[LevelIndex];
+
+	if (LevelIndex == 4) {
+		 LevelIndex = 0;
+	}
+	return level;
 }
 
 DefaultProperties

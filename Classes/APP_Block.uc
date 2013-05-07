@@ -16,25 +16,21 @@ class APP_Block extends KActorSpawnable
 	placeable;
    
 
-var(SCORING_SYSTEM) int Score;
-var(IMPACT_FORCE) float ImpactForceForDestruction;
+var() int Score;
+var() float ImpactForceForDestruction;
 var   bool bisDead;
 
-// First state Fixed
 auto state Fixed{
-	// COLISIONS here informations from physics
-	// 
+	
 	event RigidBodyCollision( PrimitiveComponent HitComponent,
 	                      PrimitiveComponent OtherComponent,
 				          const out CollisionImpactData RigidCollisionData, 
 				          int ContactIndex ){
 			local float collisionforce;
-			// totalnormalforcevector -> Force of impact
 			collisionforce = vsize(rigidcollisiondata.totalnormalforcevector);
 			if (collisionforce >= ImpactForceForDestruction){
-			  // IS ENOUTH TO DESTROY OBJECT?
 			  self.GotoState('Destroyed_');
-			  // Destroyed is own function, siehe unten
+			 // begin object class=AnimNodeSequence name=blankanimseq
 			}else{
 			 //TODO: do something else here
 			}
@@ -44,20 +40,19 @@ begin:
 }
 
 state Destroyed_{
-	// Phsyic many rigidbodcolission -> ignore all future events
-	ignores RigidBodyCollision;
 
-	begin:
-	 //TODO: do some animation here
-	bisDead =true;
-	APP_Game(worldinfo.Game).getGameStateData().Score += Score;
-	sleep(0.0);
+ignores RigidBodyCollision;
+
+begin:
+ //TODO: do some animation here
+	 bisDead =true;
+	 APP_Game(worldinfo.Game).getGameStateData().Score += Score;
+
 	self.destroy();
 }
 
 DefaultProperties
 {
-	// PROPERTIES OF THIS ONE
 	Score=1000;
     ImpactForceForDestruction=10.0
 	bIsdead =false
@@ -66,11 +61,13 @@ DefaultProperties
 	Begin Object Name=StaticMeshComponent0
             StaticMesh=StaticMesh'AngryPiouPiouXAllAssets.StaticMeshes.Cube'
 		    Materials(0)=Material'AngryPiouPiouXAllAssets.Materials.M_BlockWall_02_D'
-		    PhysMaterialOverride=PhysicalMaterial'AngryPiouPiouXAllAssets.physicsmaterial.PM_Stone'
-		
-            RBChannel=RBCC_GameplayPhysics
-		    LightingChannels=(bInitialized=True,Static=True)
-			hiddengame=false
+		    PhysMaterialOverride=PhysicalMaterial'AngryPiouPiouXAllAssets.physicsmaterial.PM_Stone'  //contains physical parameters + impact effects
+		    //ReplacementPrimitive=None
+            //RBChannel=RBCC_GameplayPhysics
+            //bAllowApproximateOcclusion=True
+            //bForceDirectLightMap=True
+            //bUsePrecomputedShadows=True
+            //LightingChannels=(bInitialized=True,Static=True)
 		    bNotifyRigidBodyCollision=true // necessary to trigger Event RigiBodyCollision
 		    ScriptRigidBodyCollisionThreshold=10.0// necessary to trigger Event RigiBodyCollision
       End Object

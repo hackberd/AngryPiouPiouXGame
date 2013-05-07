@@ -1,0 +1,33 @@
+Milestone #2
+
+Mark: 10 pts.
+•Description: Develop new  type of   “Block”
+•which has different score, physical properties (wood-like) and animations
+•Destructible or Moveable: Depending on impact collision amplitude, It will be destroyed (special animation) or just move (physics simulation)
+•Extra feature: sound for animation
+•To demonstrate your work develop a test level
+
+For inspiration : http://angrybirds.wikia.com/wiki/Angry_Birds
+
+Useful Resources:
+•Particle System : http://udn.epicgames.com/Three/ParticleSystemReference.htm
+•http://download.udk.com/tutorials/using-udk/particles.zipl
+•Physics :http://udn.epicgames.com/Three/PhysXReference.html
+
+Milestone # 3
+
+Mark: 10 pts.
+
+    Description: Develop new  type of “Bird” projectile, which also has a special “ability” when user taps  the screen after throwing it.
+    e.g. generate an explosion, multiply projectile, etc,..
+    You are free to decide what features to develop
+    To demonstrate your work develop a test level
+
+For inspiration : http://angrybirds.wikia.com/wiki/Angry_Birds
+
+Useful Resources:
+
+    Particle System : http://udn.epicgames.com/Three/ParticleSystemReference.htm
+    http://download.udk.com/tutorials/using-udk/particles.zipl
+    Physics :http://udn.epicgames.com/Three/PhysXReference.html
+

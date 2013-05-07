@@ -16,7 +16,6 @@ config(game); //config keyword see http://udn.epicgames.com/Three/ConfigurationF
 
 var config Bool        bShouldBeDisplayed;
 
-// Optische einstellungen, farbe, font
 var config String       LabelFontClass; // object cannot be defined in config, need to give a string containing class to 
 var        Font        LabelFont; 
 var config String      Label;

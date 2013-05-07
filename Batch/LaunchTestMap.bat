@@ -1,1 +1,2 @@
-..\..\..\..\Binaries\Win32\UDK.exe APP-SimpleCourtyard.udk?Game=AngryPiouPiouXGame.APP_Game?bStartMenu=false -nomoviesstartup -NoSplash -simmobile -remotecontrol -resx=1280 -resy=720 
+..\..\..\..\Binaries\Win32\UDK.exe APP-SimpleCourtyard.udk?Game=AngryPiouPiouXGame.APP_Game?bStartMenu=false -nomoviesstartup -NoSplash -simmobile -remotecontrol -windowed
+pause

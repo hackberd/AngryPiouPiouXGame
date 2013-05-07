@@ -22,15 +22,19 @@ DefaultProperties
 	bIsdead =false
     bEnableMobileTouch=true
 	Drawscale=0.3
-    ImpactForceForDestruction=10.0
+    ImpactForceForDestruction=600
+	Score=20000;
 
 	Begin Object Name=StaticMeshComponent0
             StaticMesh=StaticMesh'AngryPiouPiouXAllAssets.StaticMeshes.Cube'
 		    //Materials(0)=MaterialInstanceConstant'AngryPiouPiouXAllAssets.Materials.APP_BlockWall_Target'
             Materials(0)=Material'AngryPiouPiouXAllAssets.Materials.APP_BlockWall_Green'
-			
-			
-
+		    //ReplacementPrimitive=None
+            //RBChannel=RBCC_GameplayPhysics
+            //bAllowApproximateOcclusion=True
+            //bForceDirectLightMap=True
+            //bUsePrecomputedShadows=True
+            //LightingChannels=(bInitialized=True,Static=True)
 		    bNotifyRigidBodyCollision=true // necessary to trigger Event RigiBodyCollision
 		    ScriptRigidBodyCollisionThreshold=10.0// necessary to trigger Event RigiBodyCollision
       End Object

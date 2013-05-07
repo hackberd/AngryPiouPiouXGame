@@ -11,61 +11,60 @@
 
 class APP_ThrowingStation extends DynamicSMActor ClassGroup(AngryPiouPiou) placeable ;
 
-var() class<APP_Projectile>  ProjectileClass;
+var(PHYSIC_DEBUGGING) float                  NewGameSpeed;
+var(PHYSIC_DEBUGGING) float                  NewGravityZ;
 
-var() int                    ProjectileNumber;
+var(PROJECTILES) array<class<APP_Projectile> >  ProjectileClass;
+//var() APP_Projectile ProjectileClass;
+var int ProjectileClassIndex;
+
+var int                    ProjectileNumber; // set automatically
 var() float                  MaxImpulseForce;
 var() float                  InputVectorMultiplier;
 
-var() float NewGameSpeed;
-
-var() float DefaultGravity;
-
-var() Material TouchMaterial;
-var Material NoTouchMaterial;
-
-var  APP_Projectile          LastProjectileThrown; 
+var  APP_Projectile         LastProjectileThrown; 
 
 var vector2D                 PrevStartTouch,PrevStopTouch;
+
+var Material                        noTouchMaterial;
+var(Materials) Material               touchMaterial;
 
 //var APP_Projectile AngryPiouPiouXProjectileArchetype; // i.e. list of default properties that the Level Editor can edit from the Editor, can experitment different properties without to have to recompile the script
                                                         //: details on archetype: http://udn.epicgames.com/Three/ArchetypesTechnicalGuide.html 
 
 var APP_GameStateData GameState;
 
+
 /** Init*/
 function init(APP_GameStateData GS){
     GameState = GS;
 	GameState.nbProjLeft = ProjectileNumber;
-	setGameSpeed();
-	NoTouchMaterial = StaticMeshComponent.GetMaterial(0).GetMaterial();
+	setGameSpeed(1.0);
+	 
+
+	noTouchMaterial = StaticMeshComponent.GetMaterial(0).GetMaterial();
+	ProjectileNumber = self.ProjectileClass.Length;
 	gotostate('Active');
 }
-
-/** Debuggin function */
-function setGameSpeed() {
-	WorldInfo.Game.SetGameSpeed(NewGameSpeed);
-	
-	}
-
-function setGravity() {
-	//WorldInfo.Game.SetPhysics(
-}
-
-
-
 
 function ReActivate(){
 gotostate('Active');
 }
 
+function setGameSpeed(int speed){
+	WorldInfo.Game.SetGameSpeed(speed);
+}
+
+function setGravityZ(){
+	WorldInfo.WorldGravityZ = NewGravityZ;
+}
+
 State Active{
 event bool OnMobileTouch(PlayerController InPC, Vector2D TouchLocation){
+
+	StaticMeshComponent.SetMaterial(0, touchMaterial);
+
 	worldinfo.Game.Broadcast(self, " OBJECT TOUCH " @ self @" At POSITION" @ Touchlocation.X@" " @Touchlocation.X);
-	
-	// set material
-	StaticMeshComponent.SetMaterial(0, TouchMaterial);
-	
 	APP_Game(WorldInfo.game).getPlayerController().ThrowingPhase();
 	self.GotoState('Inactive');
 	return true; //input processeed
@@ -75,7 +74,6 @@ event bool OnMobileTouch(PlayerController InPC, Vector2D TouchLocation){
 State Inactive{
 event bool OnMobileTouch(PlayerController InPC, Vector2D TouchLocation){
 	// do nothing until player has thrown the "bird" , avoid player to re-touch station while rotating the pawn
-	
 	return true; //input processeed
 }
 }
@@ -85,47 +83,40 @@ Function ThrowProjectile(rotator r, float magnitude, vector origin){
    impulse = vector (r);
    impulse = normal(impulse) * magnitude;
    ThrowProjectileFrom( Impulse,  origin);
+
+   StaticMeshComponent.SetMaterial(0, noTouchMaterial);
 }
 
 Function ThrowProjectileFrom(vector Impulse, vector origin){
-	// Impuse -> Direction
-
+	
 	local vector  loc;
 	local rotator rot;
 	
 	loc     = origin;
 	rot     = Rotator (Impulse);
-	// Spawn Projectile, 
-	LastProjectileThrown    = spawn(class 'APP_Projectile',
-									self,
-									'projectile_tag', 
-									loc, 
-									rot,/*Archetype here*/ ,
-									true);
-
-	// SET GRAVITY
-	WorldInfo.WorldGravityZ = LastProjectileThrown.Gravity;
-	//
+	//TODO: Put APP_Projectiles as editable List of Variables of type APP_Projectiles
+	
+	
+   
+	if (ProjectileClassIndex > ProjectileClass.Length) {
+				 ProjectileClassIndex = 0;
+	}
+	 
+	LastProjectileThrown    = spawn(ProjectileClass[ProjectileClassIndex],self,'projectile_tag', loc, rot,/*Archetype here*/ ,true);
+	ProjectileClassIndex++;
 
     Impulse *= self.InputVectorMultiplier;
 	
-    WorldInfo.Game.Broadcast(self," Impulse with multiplier "@Vsize(Impulse));
+    //WorldInfo.Game.Broadcast(self," Impulse with multiplier "@Vsize(Impulse));
 	
 	if(Vsize(impulse)> self.MaxImpulseForce) {
 		impulse = Normal(impulse) * MaxImpulseForce;
 	}
-	WorldInfo.Game.Broadcast(self," Impulse with after nomarlisation "@Vsize(Impulse));
-	
-	// SET NO TOUCH MATERIAL
-	StaticMeshComponent.SetMaterial(0, NoTouchMaterial);
-	
+	//WorldInfo.Game.Broadcast(self," Impulse with after nomarlisation "@Vsize(Impulse));
+
 	LastProjectileThrown.ApplyImpulse(Impulse,VSize(Impulse), LastProjectileThrown.location);
 	
 	GameState.nbProjLeft--;
-}
-
-function resetGravity() {
-	WorldInfo.WorldGravityZ = DefaultGravity;
 }
 
 function rotator getElevation(vector2D StartTouch, vector2D EndTouch, Rotator PawnRot){
@@ -172,37 +163,37 @@ function vector addElevation(vector originalVector, float angle_degree){
 DefaultProperties
 {
 	//AngryPiouPiouXProjectileArchetype=APP_Projectile'AngryPiouPiouXAllAssets.Projectile.ProjectileArchetype'
-    ProjectileClass=class'APP_Projectile'
-    ProjectileNumber=5
+   
+	
+    
+	ProjectileNumber=5
 	MaxImpulseForce=4000
     InputVectorMultiplier=1000
-	NewGameSpeed=1
-	bEnableMobileTouch=True
-	DefaultGravity = -520;
+	NewGameSpeed=1.0
+	NewGravityZ = -520
 
-	
+	bEnableMobileTouch=True
 	TouchMaterial = Material'AngryPiouPiouXAllAssets.Materials.APP_BlockWall_Green'
+	
+
+	ProjectileClass(0) =  class'APP_Projectile_YellowBird'
+	ProjectileClassIndex = 0
+	
 
 	Tag="MAINTHROWINGSTATION"
 	Begin Object  Name=StaticMeshComponent0
 		StaticMesh=StaticMesh'AngryPiouPiouXAllAssets.StaticMeshes.TexPropCylinder'
-		//Materials(0)=MaterialInstanceConstant'AngryPiouPiouXAllAssets.Materials.APP_BlockWall_ThrowingStation'
-		Materials(0)=Material'AngryPiouPiouXAllAssets.Materials.M_BlockWall_02_D'
-		BlockRigidBody=false
-		//bUsePrecomputedShadows= FALSE
-		
+		Materials(0)= Material'AngryPiouPiouXAllAssets.Materials.M_BlockWall_02_D'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+		BlockRigidBody=false	
 	End Object
+
 	DrawScale=0.300000
 	PrePivot=(X=0.000000,Y=0.000000,Z=250.000000) // shift the mesh pivot point to be on the top of the cylinder
-	
-	
-
-	// Collision Cylinde ringame
+    
 	Begin Object Class=CylinderComponent NAME=CollisionCylinder
 		CollisionRadius=+00050.000000
 		CollisionHeight=+000150.000000
 		CollideActors=true
-		// soll ball nicht blocken
 		blockActors=false
 	End Object
 	CollisionComponent=CollisionCylinder

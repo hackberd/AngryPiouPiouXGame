@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.7.0_17" class="java.beans.XMLDecoder">
+<java version="1.7.0_13" class="java.beans.XMLDecoder">
  <object class="com.horstmann.violet.StateDiagramGraph">
   <void method="addNode">
    <object class="com.horstmann.violet.StateNode" id="StateNode0">
@@ -713,7 +713,7 @@ PlayerController - FSM</string>
    <object class="com.horstmann.violet.NoteNode">
     <void property="text">
      <void property="text">
-      <string>APP_Game</string>
+      <string>Game - FSM</string>
      </void>
     </void>
    </object>
@@ -722,19 +722,19 @@ PlayerController - FSM</string>
      <string>x</string>
      <void method="set">
       <object idref="Point2D$Double26"/>
-      <double>824.9411254969543</double>
+      <double>864.9411254969543</double>
      </void>
     </void>
     <void class="java.awt.geom.Point2D$Double" method="getField">
      <string>y</string>
      <void method="set">
       <object idref="Point2D$Double26"/>
-      <double>51.77460325558383</double>
+      <double>25.774603255583827</double>
      </void>
     </void>
     <void method="setLocation">
-     <double>824.9411254969543</double>
-     <double>51.77460325558383</double>
+     <double>864.9411254969543</double>
+     <double>25.774603255583827</double>
     </void>
    </object>
   </void>

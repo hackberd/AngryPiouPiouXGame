@@ -42,7 +42,9 @@ var bool       bStartMenu;
 
 event InitGame( string Options, out string ErrorMessage )
 {
+	
   local String bStartMenuOption;
+  `log("Got Here");
   super.InitGame(Options,ErrorMessage);
   BstartMenuOption = ParseOption( Options, "bStartMenu" ) ;
   if(bStartMenuOption==""){

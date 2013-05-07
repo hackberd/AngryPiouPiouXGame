@@ -40,6 +40,7 @@ auto state Projected{
 
 event RigidBodyCollision( PrimitiveComponent HitComponent, PrimitiveComponent OtherComponent,
 				const out CollisionImpactData RigidCollisionData, int ContactIndex ){
+	 APP_Game(worldinfo.Game).getCamera().setToNormalCam();
 	 self.GotoState('Destroyed_');	
  }
 }

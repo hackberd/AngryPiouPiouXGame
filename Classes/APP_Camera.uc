@@ -22,15 +22,20 @@ var actor  target;
 var actor  Previoustarget;
 var actor  Maintarget;
 var actor ProjectileToFollow;
+var vector PreviousCameraVector;
+var Rotator PreviousCameraRotator;
 
 var actor  Projectiletarget;
 var float  ProjFollowinDuration;
+
+var bool setNormalCam;
 
 var float  distance;
 var vector offset;
 var rotator rotationbefore;
 
 var vector2D ScreenVectorMovement;
+var int ScreenVectorMovementZ;
 
 /** Init*/
 
@@ -52,24 +57,16 @@ State ACTIVE { // just for example of state inheritance
 }
 
 state FollowProjectile extends ACTIVE {
-  simulated event Beginstate(name PrevState){
-		super.Beginstate( PrevState);// just for example of state inheritance 
-  	    rotationbefore= self.rotation;
-   }
-  simulated event EndState(name NextState){
-	   super.EndState( NextState);
-	   SetRotation(rotationbefore);
-  }
 	event tick(float DeltatTime){
 	   local rotator rot;
 	   //local vector DirectionCamToProj
 	   // AB =B-A
 	   //
-	   rot = rotator ( Projectiletarget.location - self.location);
+	   rot = rotator (  ProjectileToFollow.location  - self.location);
 	   setRotation(rot);
 	}
 begin: 
-	Sleep(ProjFollowinDuration);
+	Sleep(2.5);
 	self.gotostate('FollowPlayerInputs');
 }
 
@@ -82,18 +79,41 @@ state FollowPlayerInputs extends ACTIVE {
 	   // note: CamZ = Vertical (left/right) , CamY = Horizontal(up/down), CamX = depth (forward/backward)
 	   // note: ScreenVectorMovement.Y = vertical screen axis (positive Y-axis is pointing downward of screen)
 	   // note: ScreenVectorMovement.X = horizontal screen axis (positive X-axis is pointing Left of screen)
-	   loc = self.location + camZ * -1 * ScreenVectorMovement.Y + camY * ScreenVectorMovement.X;  
-	   ScreenVectorMovement.X  = 0; // otherwise keep moving even after touch
-	   ScreenVectorMovement.Y  = 0; // otherwise keep moving even after touch
+	   loc = self.location + camZ * -1 * ScreenVectorMovement.Y + camY * ScreenVectorMovement.X + camX * ScreenVectorMovementZ;  
 	   setlocation(loc);
 	}
 begin: 
+	if (setNormalCam) {
+			setLocation(PreviousCameraVector);
+		setRotation(PreviousCameraRotator);
+	}
 }
 
 
 function followProjectFromBehind(actor a) {
 	ProjectileToFollow = a;
+	PreviousCameraVector = self.Location;
+	PreviousCameraRotator = self.Rotation;
 	self.GotoState('ProjectFromBehind');
+}
+
+function setToNormalCam() {
+	local vector tempVec;
+	local Rotator tempRot;
+	if (self.IsInState('ProjectFromBehind')) {
+		// Location
+		tempVec = PreviousCameraVector;
+		tempVec.Y = tempVec.Y -2000 ;
+		`Log("value y " $tempVec.Y);
+		self.SetLocation(tempVec);
+		// Rotation
+		tempRot = rotator ( ProjectileToFollow.location - PreviousCameraVector);
+		self.SetRotation(tempRot);
+		// cleanup 
+		self.setNormalCam = true;
+		self.GotoState('FollowProjectile');
+	}
+	
 }
 
 state ProjectFromBehind extends ACTIVE {
@@ -101,11 +121,18 @@ state ProjectFromBehind extends ACTIVE {
 	event tick(float DeltatTime){
 	   local vector loc;
 	   local vector camX,camY,camZ;
+	   local Rotator newRot;
 	   getAxes(ProjectileToFollow.Rotation,camX,camY,camZ);
 
-	   loc = ProjectileToFollow.location + camZ * -1 * ScreenVectorMovement.Y + camY * ScreenVectorMovement.X;  
+	   loc = ProjectileToFollow.location + camZ * 50 + camX * -150 + camY *100;  
+
+	    
+       newRot = rotator(camX);      
+       newRot.Pitch -= 6068;  
+       SetRotation(newRot); 
+
 	   setlocation(loc);
-	   setRotation(rotator(camX));
+	   setRotation(newRot);
 	}
 begin: 
 }
@@ -130,8 +157,34 @@ function SetToFollowProjectile(actor ProjCamTarget ,float Duration){
 
 
 function updateCameraHorizontalAndVerticalOffset(Vector2D v, float delTatime){
-		ScreenVectorMovement.X = v.X * delTatime ; // treat as an "acceleration" : integrated over time | and Z because Z-axis is the camera up vector
-		ScreenVectorMovement.Y = v.Y * delTatime ;
+
+	if (v.X > 20) {
+		v.X = 20;
+	}
+	else if (v.X < -20) {
+		v.X = -20;
+	}
+	if (v.Y > 20) {
+		v.Y = 20;
+	}
+	else if (v.Y < -20) {
+		v.Y = -20;
+	}
+
+	ScreenVectorMovement.X = v.X;
+	ScreenVectorMovement.Y = v.Y;
+		//ScreenVectorMovement.X = v.X * delTatime ; // treat as an "acceleration" : integrated over time | and Z because Z-axis is the camera up vector
+		//ScreenVectorMovement.Y = v.Y * delTatime ;
+}
+
+function updateCameraDepth(int z, float delTatime){
+	if (z > 10) {
+		z = 10;
+	}
+	else if (z < -10) {
+		z = -10;
+	}
+		ScreenVectorMovementZ = z  ; 
 }
 
 /**
@@ -169,11 +222,11 @@ function  ReleaseTemporaryTarget(PlayerController PC){
 DefaultProperties
 {
 	tag="MAIN_CAMERA"
-  
+	setNormalCam = false
 	distance = 400
 	offset=(X=0.0,Y=0.0,Z=0.0)
 	ScreenVectorMovement=(X=0.0,Y=0.0)
-	
+	ScreenVectorMovementZ = 0
 	/**inherited var*/
 	FOVAngle=90.0
 	bConstrainAspectRatio=TRUE

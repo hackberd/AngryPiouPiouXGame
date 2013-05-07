@@ -20,10 +20,13 @@ class APP_PlayerController extends SimplePC
 	config(Game);
 
 /*Input buffered var*/
-var vector2D StartTouch2DVector,EndTouch2DVector,Swipe2DVector;
+var vector2D StartTouch2DVector1,EndTouch2DVector1,Swipe2DVector1;
+var vector2D StartTouch2DVector2,EndTouch2DVector2,Swipe2DVectorZ,Swipe2DVectorZ2,Swipe2DVectorZ3 ;
 var vector   Swipe2DVector3D;
 var float    Swipe2DVectorVSize;
+var float    Zoom;
 var  float   Angle,AngleBefore;
+var int Touches;
 var rotator  r;
 
 var  APP_Projectile          LastProjectileThrown; 
@@ -87,18 +90,16 @@ function SetupZones(){
 
 	super.SetupZones();
 	FreeLookZone.OnTapDelegate          =  MobilePlayerInput(PlayerInput).ProcessWorldTouch; // to trigger Onmobileinput event on actor
-	FreeLookZone.OnProcessInputDelegate = TouchScreenInputCallback;
+	FreeLookZone.OnProcessInputDelegate = OnProcessInputDelegate;
+	MPI.OnInputTouch = TouchScreenInputCallback;
 }
 
 /** Player Touch Screen events  handling*/
+function  bool OnProcessInputDelegate(MobileInputZone Zone, float DeltaTime, int Handle, ETouchType EventType, Vector2D TouchLocation) {}
 
-Function bool TouchScreenInputCallback(MobileInputZone Zone,
-								float DeltaTime,
-								int Handle,
-								ETouchType EventType,
-								Vector2D TouchLocation){
+Function TouchScreenInputCallback(int Handle, ETouchType Type, Vector2D TouchLocation, float DeviceTimestamp, int TouchpadIndex){
 	/* place holder overridded in state*/	
-	 return false;
+	// return false;
 }
 
 function UpdateRotation( float DeltaTime ){
@@ -146,27 +147,61 @@ begin:
 }
 
 State PlayerMovingCamera {
+	Function TouchScreenInputCallback(int Handle, ETouchType Type, Vector2D TouchLocation, float DeviceTimestamp, int TouchpadIndex){
+									
+		if (Type == Touch_Began)	{
+			Touches++;
+			if (Touches == 1) {
+				StartTouch2DVector1 = TouchLocation;
+			}
+			if (Touches == 2) {
+				if (Handle == 0) {
+					StartTouch2DVector1 = TouchLocation;
+				}
+				else if (Handle == 1) {
+					StartTouch2DVector2 = TouchLocation;
+				}
+			}
 
-	Function bool TouchScreenInputCallback(MobileInputZone Zone,
-									float DeltaTime,
-									int Handle,
-									ETouchType EventType,
-									Vector2D TouchLocation){
-		if (EventType == Touch_Began)	{
-			StartTouch2DVector = TouchLocation;
-			return false;
+			//return false;
 		}
-		else if(EventType == Touch_Moved)	{
-			EndTouch2DVector    = TouchLocation;
-			Swipe2DVector       = class 'APP_MathUtils'.static.getVectorDir(StartTouch2DVector ,EndTouch2DVector);
- 			APP_Game(WorldInfo.game).getCamera().updateCameraHorizontalAndVerticalOffset(Swipe2DVector,DeltaTime);
-			return false; 
-		}	else	if (EventType == Touch_Ended)	{
-			return false; 
+		else if(Type == Touch_Moved)	{
+			if (Touches == 2) {
+				 APP_Game(WorldInfo.game).getCamera().ScreenVectorMovement.X  = 0;
+				 APP_Game(WorldInfo.game).getCamera().ScreenVectorMovement.Y  = 0;
+				if (Handle == 0) {
+					EndTouch2DVector1 = TouchLocation;
+				}
+				else if (Handle == 1) {
+					EndTouch2DVector2 = TouchLocation;
+				}
+				Swipe2DVectorZ       = class 'APP_MathUtils'.static.getVectorDir(EndTouch2DVector1 ,EndTouch2DVector2);
+				Swipe2DVectorZ2      = class 'APP_MathUtils'.static.getVectorDir(StartTouch2DVector1,StartTouch2DVector2);
+				Zoom = class 'APP_MathUtils'.static.Magnitude(Swipe2DVectorZ) - class 'APP_MathUtils'.static.Magnitude(Swipe2DVectorZ2) ;
+				
+
+				`LOG("Zoom "$Zoom);
+ 				APP_Game(WorldInfo.game).getCamera().updateCameraDepth(Zoom,DeviceTimestamp);
+				
+			}
+			else {
+				EndTouch2DVector1    = TouchLocation;
+				Swipe2DVector1       = class 'APP_MathUtils'.static.getVectorDir(StartTouch2DVector1 ,EndTouch2DVector1);
+ 				APP_Game(WorldInfo.game).getCamera().updateCameraHorizontalAndVerticalOffset(Swipe2DVector1,DeviceTimestamp);
+				//return false; 
+			}
+		}	else if (Type == Touch_Ended)	{
+			Touches--;
+			 APP_Game(WorldInfo.game).getCamera().ScreenVectorMovement.X  = 0; // otherwise keep moving even after touch
+			APP_Game(WorldInfo.game).getCamera().ScreenVectorMovement.Y  = 0; // otherwise keep moving even after touch
+			APP_Game(WorldInfo.game).getCamera().ScreenVectorMovementZ = 0;
+			
+			//return false; 
 		}
-		return false;
+		//return false;
 	}
 begin:
+Touches = 0;
  APP_Game(WorldInfo.game).getCamera().SetToFollowPlayerInputs(self); 
  pawn.SetRotation(APP_Game(WorldInfo.game).getThrowingStation().Rotation); // reset rotation to horizontal
     
@@ -175,32 +210,28 @@ begin:
 
 State PlayerThrowing{
 
-	Function bool TouchScreenInputCallback(MobileInputZone Zone,
-									float DeltaTime,
-									int Handle,
-									ETouchType EventType,
-									Vector2D TouchLocation){						
+	Function TouchScreenInputCallback(int Handle, ETouchType Type, Vector2D TouchLocation, float DeviceTimestamp, int TouchpadIndex){						
         local rotator newPawnRotation;
 
-		if (EventType == Touch_Began){
-			StartTouch2DVector = TouchLocation;
-			return true; //input handled no further proceessing
-		}else if(EventType == Touch_Moved){
-			EndTouch2DVector=TouchLocation;
-			Swipe2DVector       = class 'APP_MathUtils'.static.getVectorDir(StartTouch2DVector ,EndTouch2DVector);
-			newPawnRotation     = APP_Game(WorldInfo.game).getThrowingStation().getElevation(StartTouch2DVector,EndTouch2DVector,pawn.rotation);
+		if (Type == Touch_Began){
+			StartTouch2DVector1 = TouchLocation;
+			//return true; //input handled no further proceessing
+		}else if(Type == Touch_Moved){
+			EndTouch2DVector1=TouchLocation;
+			Swipe2DVector1       = class 'APP_MathUtils'.static.getVectorDir(StartTouch2DVector1 ,EndTouch2DVector1);
+			newPawnRotation     = APP_Game(WorldInfo.game).getThrowingStation().getElevation(StartTouch2DVector1,EndTouch2DVector1,pawn.rotation);
 			pawn.SetRotation(newPawnRotation);
 			//TODO DEBUG
 			//APP_PlayerPawn(Pawn).ScaleX(Swipe2DVector);
-			return true; //input handled no further proceessing
-		}else if (EventType == Touch_Ended){
+			//return true; //input handled no further proceessing
+		}else if (Type == Touch_Ended){
 			  APP_Game(WorldInfo.game).getThrowingStation().ThrowProjectile(pawn.rotation,
-			  																class 'APP_MathUtils'.static.Magnitude(Swipe2DVector),
+			  																class 'APP_MathUtils'.static.Magnitude(Swipe2DVector1),
 			  																pawn.location);;
 			self.GotoState('PlayerWaitingResult');
-			return true; //input handled no further proceessing
+			//return true; //input handled no further proceessing
 		}
-		return false; // input not handled
+		//return false; // input not handled
 	}	
 begin:
 	
@@ -210,26 +241,22 @@ begin:
 
 state PlayerWaitingResult{
 
-	Function bool TouchScreenInputCallback(MobileInputZone Zone,
-									float DeltaTime,
-									int Handle,
-									ETouchType EventType,
-									Vector2D TouchLocation){
-		if (EventType == Touch_Began){
+	Function TouchScreenInputCallback(int Handle, ETouchType Type, Vector2D TouchLocation, float DeviceTimestamp, int TouchpadIndex){
+		if (Type == Touch_Began){
 			//TODO: trigger a projectile's option when touch screen while projectile is in the air
 			APP_Game(WorldInfo.game).getThrowingStation().LastProjectileThrown.SpecialEffect();
-			return true; //input handled no further proceessing
+			//return true; //input handled no further proceessing
 		}
-		return false; // input not handled
+	//	return false; // input not handled
 	}
 
 begin:
 
 	LastProjectileThrown = APP_Game(worldinfo.Game).getThrowingStation().LastProjectileThrown;
 	APP_Game(worldinfo.Game).getThrowingStation().ReActivate();
-	//APP_Game(worldinfo.Game).getCamera().followProjectFromBehind(
-	//	APP_Game(worldinfo.Game).getThrowingStation().LastProjectileThrown
-	//	);
+	APP_Game(worldinfo.Game).getCamera().followProjectFromBehind(
+		APP_Game(worldinfo.Game).getThrowingStation().LastProjectileThrown
+		);
 	//DEBUG TODO uncomment
 	//APP_Game(WorldInfo.game).getCamera().SetToFollowProjectile(LastProjectileThrown,6.0);
 	sleep(3.0); // hardcoded waiting time

@@ -154,7 +154,10 @@ State PlayerMovingCamera {
 	Function TouchScreenInputCallback(int Handle, ETouchType Type, Vector2D TouchLocation, float DeviceTimestamp, int TouchpadIndex){
 		if (doOnce) {
 			doOnce = false;
+			APP_Game(WorldInfo.game).getHUD().Infos.setValue("Tab Slingshot to start aiming");	
+			APP_Game(WorldInfo.game).getHUD().DrawHUDItems();
 			 APP_Game(WorldInfo.game).getCamera().SetToFollowPlayerInputs(self); 
+			 
 		}
 		if (Type == Touch_Began)	{
 			Touches++;
@@ -209,7 +212,6 @@ State PlayerMovingCamera {
 	}
 begin:
  Touches = 0;
- 	
 
  pawn.SetRotation(APP_Game(WorldInfo.game).getThrowingStation().Rotation); // reset rotation to horizontal
     
@@ -233,7 +235,9 @@ State PlayerThrowing{
 			/// 
 
 		    magnitude =  (class 'APP_MathUtils'.static.Magnitude(Swipe2DVector1) / 300) * 100 ;
-			
+			if (magnitude > 100) {
+				magnitude = 100;
+			}
 			
 			APP_Game(WorldInfo.game).getHUD().UpdateHUDitems();
 			APP_Game(WorldInfo.game).getHUD().DrawHUDItems();
@@ -241,6 +245,8 @@ State PlayerThrowing{
 			//APP_PlayerPawn(Pawn).ScaleX(Swipe2DVector);
 			//return true; //input handled no further proceessing
 		}else if (Type == Touch_Ended){
+			  APP_Game(WorldInfo.game).getHUD().Infos.setValue("");	
+			APP_Game(WorldInfo.game).getHUD().DrawHUDItems();
 			  APP_Game(WorldInfo.game).getThrowingStation().ThrowProjectile(pawn.rotation,
 			  																class 'APP_MathUtils'.static.Magnitude(Swipe2DVector1),
 			  																pawn.location);
@@ -252,7 +258,8 @@ State PlayerThrowing{
 		//return false; // input not handled
 	}	
 begin:
-	
+	  APP_Game(WorldInfo.game).getHUD().Infos.setValue("Tab and swipe anywhere to aim. Release to fire.");	
+			APP_Game(WorldInfo.game).getHUD().DrawHUDItems();
 	
 }
 
@@ -281,6 +288,8 @@ begin:
 	Sleep(1);
 	APP_Game(worldinfo.Game).getCamera().setToNormalCam();
 	sleep(4.0); // hardcoded waiting time
+	 APP_Game(WorldInfo.game).getHUD().Infos.setValue("Tab Slingshot to start aiming");	
+			APP_Game(WorldInfo.game).getHUD().DrawHUDItems();
 	self.gotostate('PlayerMovingCamera');
 }
 

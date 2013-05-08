@@ -23,6 +23,7 @@ var APP_HUDItem  GameOverScore;
 var APP_HUDItem  NextProjectiles;
 var APP_HUDItem  Force;
 var APP_HUDItem  GameOverReason;
+var APP_HUDItem  Infos;
 
 var array<APP_HUDItem> HUDItems;
 
@@ -63,6 +64,10 @@ function initialHUDItems(){
 	 HUDItems.AddItem(GameOverScore);
 	 GameOverReason     = new class 'APP_HUDItem_GameOverReason';
 	 HUDItems.AddItem(GameOverReason);
+
+	 Infos     = new class 'APP_HUDItem_Info';
+	 HUDItems.AddItem(Infos);
+	 Infos.setValue("Tab screen to move camera");
 	
 	 NextProjectiles      = new class 'APP_HUDItem_NextProjectiles';
 	 HUDItems.AddItem(NextProjectiles);
@@ -126,6 +131,7 @@ Function SetHUDGameOver(){
 	GameOverScore.bShouldBeDisplayed    = true;
 	GameOverReason.bShouldBeDisplayed   = true;
 	Force.bShouldBeDisplayed  = false;
+	Infos.bShouldBeDisplayed = false;
 	NextProjectiles.bShouldBeDisplayed  = false;
 }
 

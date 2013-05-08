@@ -10,7 +10,14 @@
 */
 
 class APP_ThrowingStation extends DynamicSMActor ClassGroup(AngryPiouPiou) placeable ;
-
+enum ETouchType
+{
+	Touch_Began,
+	Touch_Moved,
+	Touch_Stationary,
+	Touch_Ended,
+	Touch_Cancelled,
+};
 var(PHYSIC_DEBUGGING) float                  NewGameSpeed;
 var(PHYSIC_DEBUGGING) float                  NewGravityZ;
 
@@ -29,6 +36,10 @@ var vector2D                 PrevStartTouch,PrevStopTouch;
 
 var Material                        noTouchMaterial;
 var(Materials) Material               touchMaterial;
+var(Materials) Material               touchMaterial1;
+
+var actor arrow;
+var bool hasArrow;
 
 //var APP_Projectile AngryPiouPiouXProjectileArchetype; // i.e. list of default properties that the Level Editor can edit from the Editor, can experitment different properties without to have to recompile the script
                                                         //: details on archetype: http://udn.epicgames.com/Three/ArchetypesTechnicalGuide.html 
@@ -63,14 +74,17 @@ function setGravityZ(){
 State Active{
 event bool OnMobileTouch(PlayerController InPC, Vector2D TouchLocation){
 
-	StaticMeshComponent.SetMaterial(0, touchMaterial);
+	StaticMeshComponent.SetMaterial(0, touchMaterial1);
 
 	worldinfo.Game.Broadcast(self, " OBJECT TOUCH " @ self @" At POSITION" @ Touchlocation.X@" " @Touchlocation.X);
-	APP_Game(WorldInfo.game).getPlayerController().ThrowingPhase();
+	APP_Game(WorldInfo.game).getPlayerController().ThrowingPhase(); 
+	APP_Game(WorldInfo.game).getPlayerController().TouchScreenInputCallback(0,Touch_Began,TouchLocation,1.0,0);
 	self.GotoState('Inactive');
 	return true; //input processeed
 }
 }
+
+
 
 State Inactive{
 event bool OnMobileTouch(PlayerController InPC, Vector2D TouchLocation){
@@ -105,6 +119,8 @@ function SpwanNextProjectiles() {
 	 NextProjectiles[i].LifeSpan = 10000;
    }
 }
+
+
 
 Function ThrowProjectileFrom(vector Impulse, vector origin){
 	
@@ -142,11 +158,16 @@ Function ThrowProjectileFrom(vector Impulse, vector origin){
 function rotator getElevation(vector2D StartTouch, vector2D EndTouch, Rotator PawnRot){
 	local vector2D  direction;
 	local rotator newRotation; 
+	local rotator arrowRot; 
 	local float Yoffset,PitchAngle;
 	local float dir;
+	local float magmax;
+	local vector x,y,z;
 	if(class 'APP_MathUtils'.static.equal(EndTouch,PrevStopTouch)) {
 		return PawnRot;
 	}
+
+	
 	
 	PrevStopTouch  = EndTouch;
 
@@ -156,9 +177,29 @@ function rotator getElevation(vector2D StartTouch, vector2D EndTouch, Rotator Pa
 	else            dir =-1.0;  // if down
     PitchAngle          = class 'APP_MathUtils'.static.getAngle(direction);//dir * Magnitude(direction);
 	newRotation         = self.rotation;
-	newRotation.Pitch   = abs(PitchAngle) *dir *DegToUnrRot ;
+	newRotation.Pitch   = abs(PitchAngle) *dir *DegToUnrRot * 0.7 ;
 	PitchAngle          = newRotation.pitch * UnrRotToDeg;
 	Worldinfo.Game.Broadcast(self, " PitchAngle" @ PitchAngle @"Magnitude(v)"@class 'APP_MathUtils'.static.Magnitude(direction) @" Yoffset "@Yoffset);
+	
+	getAxes(newRotation,x,y,z);
+	if (!hasArrow) {
+		arrow = spawn(class'APP_Arrow',self,'projectile_tag', self.Location + x*class 'APP_MathUtils'.static.Magnitude(direction) *2, newRotation,/*Archetype here*/ ,true);
+		self.hasArrow = true;
+		arrow.SetDrawScale3D(vect(3.0,1.0,6.0));
+	
+	}
+	else {
+		arrowRot = newRotation;
+		 arrowRot.Pitch += 16384;
+		arrow.SetRotation(arrowRot);
+		magmax = class 'APP_MathUtils'.static.Magnitude(direction);
+		if (magmax > 200) {
+			magmax = 200;
+		}
+		arrow.SetLocation(self.Location + x* 300 + x*magmax *2);
+	}
+	
+	
 	return newRotation;
 }
 
@@ -185,7 +226,7 @@ DefaultProperties
 	//AngryPiouPiouXProjectileArchetype=APP_Projectile'AngryPiouPiouXAllAssets.Projectile.ProjectileArchetype'
    
 	
-    
+    gotArrow = false;
 	ProjectileNumber=5
 	MaxImpulseForce=4000
     InputVectorMultiplier=1000
@@ -194,7 +235,7 @@ DefaultProperties
 
 	bEnableMobileTouch=True
 	TouchMaterial = Material'AngryPiouPiouXAllAssets.Materials.APP_BlockWall_Green'
-	
+	TouchMaterial1 = Material'AngryPiouPiouXAllAssets.Materials.APP_BlockWall_Green'
 
 	ProjectileClass(0) =  class'APP_Projectile_YellowBird'
 	ProjectileClassIndex = 0

@@ -55,6 +55,7 @@ begin:
 State Destroyed_{
 	ignores RigidBodyCollision;
 begin:
+ spawn(class 'APP_Projectile_RedPS',self,'mytaghere', self.Location ,self.Rotation,/*Archetype here*/ ,true);
  TrailParticleSystem.SetActive(false);
 }
 

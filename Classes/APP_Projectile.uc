@@ -30,6 +30,7 @@ class APP_Projectile  extends KActorSpawnable ClassGroup(AngryPiouPiou)
 	placeable;
 
 var ParticleSystemComponent TrailParticleSystem;
+var string MyName; 
 
 simulated event Postbeginplay(){
    super.PostBeginPlay(); //dont lost previous initialisation (i.e. parent's constructor-like)
@@ -40,9 +41,15 @@ auto state Projected{
 
 event RigidBodyCollision( PrimitiveComponent HitComponent, PrimitiveComponent OtherComponent,
 				const out CollisionImpactData RigidCollisionData, int ContactIndex ){
-	 APP_Game(worldinfo.Game).getCamera().setToNormalCam();
+	 
 	 self.GotoState('Destroyed_');	
  }
+}
+
+state Floating{
+	ignores RigidBodyCollision;
+begin:
+	setphysics(PHYS_NONE);
 }
 
 State Destroyed_{
@@ -62,12 +69,13 @@ DefaultProperties
 	  LifeSpan              =4.0 //automaticall destroyed after 4 sec
 	  bEnableMobileTouch    =True
       DrawScale             =0.2
+	  MyName = "Normal Bird"
 
 	 Begin Object Name=StaticMeshComponent0
             StaticMesh      =StaticMesh'AngryPiouPiouXAllAssets.StaticMeshes.Sphere'
-        	Materials(0)    =Material'AngryPiouPiouXAllAssets.Materials.M_BlockWall_02_D'
+        	Materials(0)    =Material'AngryPiouPiouXAllAssets.Textures.WidgetMaterial_X'
 
-			PhyMaterialOverride=PhysicalMaterial'AngryPiouPiouXAllAssets.PhysicalMaterials.PM_Projectile'
+			PhysMaterialOverride=PhysicalMaterial'AngryPiouPiouXAllAssets.PhysicalMaterials.PM_Projectile'
 								
 		    bNotifyRigidBodyCollision=true // necessary to trigger Event RigiBodyCollision
 		    ScriptRigidBodyCollisionThreshold=10.0// necessary to trigger Event RigiBodyCollision

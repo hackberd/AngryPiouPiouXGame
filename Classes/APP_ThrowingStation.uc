@@ -15,6 +15,7 @@ var(PHYSIC_DEBUGGING) float                  NewGameSpeed;
 var(PHYSIC_DEBUGGING) float                  NewGravityZ;
 
 var(PROJECTILES) array<class<APP_Projectile> >  ProjectileClass;
+var array<actor>  NextProjectiles;
 //var() APP_Projectile ProjectileClass;
 var int ProjectileClassIndex;
 
@@ -87,6 +88,24 @@ Function ThrowProjectile(rotator r, float magnitude, vector origin){
    StaticMeshComponent.SetMaterial(0, noTouchMaterial);
 }
 
+
+function SpwanNextProjectiles() {
+  local int i;
+   local vector loc,x,y,z,victor;
+   local rotator rot;
+   loc = self.Location;
+   rot = self.Rotation;
+	GetAxes(rot,x,y,z);
+	victor = z * 60;
+	z = z * 90;
+   for( i=0; i<ProjectileClass.Length; i++ )
+   {
+     victor = victor + z;
+     NextProjectiles.AddItem(spawn(ProjectileClass[i],self,'projectile_tag', loc + victor, rot,/*Archetype here*/ ,true));
+	 NextProjectiles[i].LifeSpan = 10000;
+   }
+}
+
 Function ThrowProjectileFrom(vector Impulse, vector origin){
 	
 	local vector  loc;
@@ -96,12 +115,12 @@ Function ThrowProjectileFrom(vector Impulse, vector origin){
 	rot     = Rotator (Impulse);
 	//TODO: Put APP_Projectiles as editable List of Variables of type APP_Projectiles
 	
-	
+	APP_Game(WorldInfo.game).gotostate('GameRunningPre'); 
    
 	if (ProjectileClassIndex > ProjectileClass.Length) {
 				 ProjectileClassIndex = 0;
 	}
-	 
+	 NextProjectiles[ProjectileClassIndex].Destroy();
 	LastProjectileThrown    = spawn(ProjectileClass[ProjectileClassIndex],self,'projectile_tag', loc, rot,/*Archetype here*/ ,true);
 	ProjectileClassIndex++;
 
@@ -117,6 +136,7 @@ Function ThrowProjectileFrom(vector Impulse, vector origin){
 	LastProjectileThrown.ApplyImpulse(Impulse,VSize(Impulse), LastProjectileThrown.location);
 	
 	GameState.nbProjLeft--;
+	
 }
 
 function rotator getElevation(vector2D StartTouch, vector2D EndTouch, Rotator PawnRot){
@@ -136,7 +156,7 @@ function rotator getElevation(vector2D StartTouch, vector2D EndTouch, Rotator Pa
 	else            dir =-1.0;  // if down
     PitchAngle          = class 'APP_MathUtils'.static.getAngle(direction);//dir * Magnitude(direction);
 	newRotation         = self.rotation;
-	newRotation.Pitch   = abs(PitchAngle) *dir *DegToUnrRot * 0.3;
+	newRotation.Pitch   = abs(PitchAngle) *dir *DegToUnrRot ;
 	PitchAngle          = newRotation.pitch * UnrRotToDeg;
 	Worldinfo.Game.Broadcast(self, " PitchAngle" @ PitchAngle @"Magnitude(v)"@class 'APP_MathUtils'.static.Magnitude(direction) @" Yoffset "@Yoffset);
 	return newRotation;

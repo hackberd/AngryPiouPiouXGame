@@ -60,7 +60,9 @@ function LoadRightLevel() {
 }
 
 function RunGame(){
-	gotostate('GameRunning'); 
+	gotostate('GameRunningPre'); 
+	APP_Game(WorldInfo.game).getCamera().GotoState('OverviewCamera');
+	APP_GAME(worldinfo.game).getThrowingStation().SpwanNextProjectiles();
 	APP_GAME(worldinfo.game).getPlayerController().PreThrowingPhase();
 }
 
@@ -77,11 +79,18 @@ begin:
  GameState.bIsGameStarted=true;
 }
 
+state GameRunningPre
+{ 
+begin:
+ Sleep(5);
+ gotostate('GameRunning'); 
+}
 
 
 State GameResults 
 {
 begin:
+	IsGameOver(GameState);
 	Switch(GameState.GameOverReason)
 	{
 	case "WON": 
@@ -100,7 +109,7 @@ begin:
 State GameWaitingTransition
 {
 begin:
-	sleep(4.0);
+	sleep(5.0);
     self.gotostate('GameResults');
 }
 

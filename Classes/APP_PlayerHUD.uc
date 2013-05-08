@@ -20,6 +20,8 @@ var APP_HUDItem  ProjectileScore;
 var APP_HUDItem  TargetScore;
 var APP_HUDItem  Score;
 var APP_HUDItem  GameOverScore;
+var APP_HUDItem  NextProjectiles;
+var APP_HUDItem  Force;
 var APP_HUDItem  GameOverReason;
 
 var array<APP_HUDItem> HUDItems;
@@ -62,6 +64,12 @@ function initialHUDItems(){
 	 GameOverReason     = new class 'APP_HUDItem_GameOverReason';
 	 HUDItems.AddItem(GameOverReason);
 	
+	 NextProjectiles      = new class 'APP_HUDItem_NextProjectiles';
+	 HUDItems.AddItem(NextProjectiles);
+	 Force     = new class 'APP_HUDItem_Force';
+	 HUDItems.AddItem(Force);
+
+
 	 foreach HUDItems(temp) temp.LoadAssets(); // font and texture specified in config file
 }
 
@@ -75,7 +83,9 @@ function UpdateHUDConfig() // Use one State and multi-HUD config system for gene
 }
 
 function UpdateHUDitems(){
+
    ProjectileScore.setValue(GameState.nbProjLeft);
+   Force.setValue(APP_Game(WorldInfo.game).getPlayerController().magnitude $" %");
    TargetScore    .setValue(GameState.nbTargetLeft);
    Score.setValue(GameState.score);
    GameOverReason .setValue(" "@GameState.GameOverReason);
@@ -89,6 +99,16 @@ function DrawHUDItems(){
 	 	Item.Draw(Canvas);
 	 }
 	}
+}
+
+function setHUDforThrow() {
+	Force.bShouldBeDisplayed  = true;
+	NextProjectiles.bShouldBeDisplayed  = true;
+}
+
+function disableHUDforThrow() {
+	Force.bShouldBeDisplayed  = false;
+	NextProjectiles.bShouldBeDisplayed  = true;
 }
 
 Function SetHUDGameRunning(){
@@ -105,6 +125,8 @@ Function SetHUDGameOver(){
 	Score.bshouldBeDisplayed            = false;
 	GameOverScore.bShouldBeDisplayed    = true;
 	GameOverReason.bShouldBeDisplayed   = true;
+	Force.bShouldBeDisplayed  = false;
+	NextProjectiles.bShouldBeDisplayed  = false;
 }
 
 DefaultProperties

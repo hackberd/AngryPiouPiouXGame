@@ -41,7 +41,7 @@ DefaultProperties
             StaticMesh      =StaticMesh'AngryPiouPiouXAllAssets.StaticMeshes.Cube'
         	Materials(0)    =Material'AngryPiouPiouXAllAssets.Materials.Yellow'
 
-			PhyMaterialOverride=PhysicalMaterial'AngryPiouPiouXAllAssets.PhysicalMaterials.PM_Projectile'
+			PhysMaterialOverride=PhysicalMaterial'AngryPiouPiouXAllAssets.PhysicalMaterials.PM_Projectile'
 								
 		    bNotifyRigidBodyCollision=true // necessary to trigger Event RigiBodyCollision
 		    ScriptRigidBodyCollisionThreshold=10.0// necessary to trigger Event RigiBodyCollision

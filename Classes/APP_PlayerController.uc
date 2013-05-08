@@ -29,6 +29,8 @@ var  float   Angle,AngleBefore;
 var int Touches;
 var rotator  r;
 
+var float magnitude;
+
 var bool doOnce;
 
 var  APP_Projectile          LastProjectileThrown; 
@@ -207,7 +209,7 @@ State PlayerMovingCamera {
 	}
 begin:
  Touches = 0;
- 	APP_Game(WorldInfo.game).getCamera().GotoState('OverviewCamera');
+ 	
 
  pawn.SetRotation(APP_Game(WorldInfo.game).getThrowingStation().Rotation); // reset rotation to horizontal
     
@@ -218,23 +220,33 @@ State PlayerThrowing{
 
 	Function TouchScreenInputCallback(int Handle, ETouchType Type, Vector2D TouchLocation, float DeviceTimestamp, int TouchpadIndex){						
         local rotator newPawnRotation;
-
+		
 		if (Type == Touch_Began){
 			StartTouch2DVector1 = TouchLocation;
 			//return true; //input handled no further proceessing
 		}else if(Type == Touch_Moved){
 			EndTouch2DVector1=TouchLocation;
-			Swipe2DVector1       = class 'APP_MathUtils'.static.getVectorDir(StartTouch2DVector1 ,EndTouch2DVector1);
+			Swipe2DVector1       = class 'APP_MathUtils'.static.getVectorDir(StartTouch2DVector1 ,EndTouch2DVector1) *2;
 			newPawnRotation     = APP_Game(WorldInfo.game).getThrowingStation().getElevation(StartTouch2DVector1,EndTouch2DVector1,pawn.rotation);
 			pawn.SetRotation(newPawnRotation);
+			
+			/// 
+
+		    magnitude =  (class 'APP_MathUtils'.static.Magnitude(Swipe2DVector1) / 300) * 100 ;
+			
+			
+			APP_Game(WorldInfo.game).getHUD().UpdateHUDitems();
+			APP_Game(WorldInfo.game).getHUD().DrawHUDItems();
 			//TODO DEBUG
 			//APP_PlayerPawn(Pawn).ScaleX(Swipe2DVector);
 			//return true; //input handled no further proceessing
 		}else if (Type == Touch_Ended){
 			  APP_Game(WorldInfo.game).getThrowingStation().ThrowProjectile(pawn.rotation,
 			  																class 'APP_MathUtils'.static.Magnitude(Swipe2DVector1),
-			  																pawn.location);;
-			self.GotoState('PlayerWaitingResult');
+			  																pawn.location);
+			 
+			
+	self.GotoState('PlayerWaitingResult');
 			//return true; //input handled no further proceessing
 		}
 		//return false; // input not handled
@@ -243,6 +255,7 @@ begin:
 	
 	
 }
+
 
 
 state PlayerWaitingResult{
@@ -265,13 +278,16 @@ begin:
 		);
 	//DEBUG TODO uncomment
 	//APP_Game(WorldInfo.game).getCamera().SetToFollowProjectile(LastProjectileThrown,6.0);
-	sleep(3.0); // hardcoded waiting time
+	Sleep(1);
+	APP_Game(worldinfo.Game).getCamera().setToNormalCam();
+	sleep(4.0); // hardcoded waiting time
 	self.gotostate('PlayerMovingCamera');
 }
 
 
 defaultproperties
 {
+	magnitude = 0;
   doOnce = true;
   InputClass=class'APP_PlayerInput'
 }
